@@ -96,12 +96,10 @@
         /* --- Sección Hero --- */
         /* ------------------------- */
         
-        /* --- CÓMO AÑADIR IMAGEN DE FONDO (Req 8) ---
-           1. Descomenta la línea 'background-image' de abajo.
-           2. Reemplaza 'URL_DE_TU_IMAGEN.jpg' con la ruta a tu imagen.
-        */
         .hero-section {
+            /* REEMPLAZA 'logo.png' si usas otra imagen de fondo */
             /* background-image: url('URL_DE_TU_IMAGEN.jpg'); */
+            
             background-size: cover;
             background-position: center;
             background-attachment: fixed; 
@@ -192,6 +190,7 @@
             cursor: pointer;
             transition: background-color 0.3s, transform 0.1s;
             box-shadow: 0 0 10px var(--color-accent-glow);
+            margin-top: 10px;
         }
         .game-button-style:disabled {
             background-color: var(--color-text-muted);
@@ -552,7 +551,7 @@
             /* --- Lógica de Hora y Estado (Turno Partido) --- */
             /* ------------------------------------- */
             
-            // Define tu horario de atención aquí (Formato 24 horas)
+            // Horarios de atención (Formato 24 horas)
             const horarioAtencion = {
                 0: [], // Domingo (Cerrado)
                 1: [{ open: 8, close: 12 }, { open: 16, close: 20 }], // Lunes
