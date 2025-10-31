@@ -63,7 +63,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 2.5rem; /* Padding reducido para logo */
+            padding: 1rem 2.5rem;
             background: rgba(10, 15, 11, 0.7);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--color-border);
@@ -74,7 +74,7 @@
         }
         
         .nav-logo img {
-            max-height: 40px; /* <-- AJUSTA LA ALTURA DE TU LOGO AQUÍ */
+            max-height: 40px; 
             display: block;
         }
 
@@ -97,17 +97,12 @@
         /* ------------------------- */
         
         .hero-section {
-            /* ================================================================
-            --- ¡IMAGEN DE FONDO CORREGIDA! (Req 1) ---
-            Asegúrate de que 'TU_IMAGEN_DE_FONDO.jpg' coincida EXACTAMENTE
-            con el nombre del archivo que subiste a GitHub.
-            ================================================================
-            */
+            /* REEMPLAZA 'TU_IMAGEN_DE_FONDO.jpg' */
             background-image: url('TU_IMAGEN_DE_FONDO.jpg');
             
             background-size: cover;
             background-position: center;
-            background-attachment: fixed; /* Opcional: crea efecto parallax */
+            background-attachment: fixed;
             
             display: flex;
             flex-direction: column;
@@ -161,7 +156,7 @@
         }
         #status-open-closed.closed {
             color: var(--color-text-light);
-            background-color: #8B0000; /* Rojo oscuro para cerrado */
+            background-color: #8B0000;
         }
 
         /* Estilo de Botón Futurista */
@@ -262,8 +257,20 @@
             color: var(--color-text-muted);
         }
         
-        .timeline-content p strong { /* Estilo para fecha de efeméride */
+        .timeline-content p strong {
              color: var(--color-accent);
+        }
+
+        /* Estilo específico para Noticias */
+        .timeline-content a {
+            color: var(--color-accent);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-block;
+            margin-top: 10px;
+        }
+        .timeline-content a:hover {
+            text-decoration: underline;
         }
 
         /* Animación de Scroll */
@@ -293,7 +300,7 @@
         }
         .horarios-list li strong {
             color: var(--color-text-light);
-            min-width: 140px; /* Alineación */
+            min-width: 140px; 
             display: inline-block;
         }
 
@@ -322,22 +329,22 @@
             margin-bottom: 1.5rem;
         }
         .social-icons a {
-            display: flex; /* Usar flex para centrar */
+            display: flex;
             align-items: center;
             justify-content: center;
-            width: 40px;  /* Ancho fijo */
-            height: 40px; /* Alto fijo */
-            padding: 0;   /* Quitar padding */
+            width: 40px;
+            height: 40px;
+            padding: 0;
             background: var(--color-border);
-            border-radius: 50%; /* Círculo perfecto */
+            border-radius: 50%;
             transition: background 0.3s ease, transform 0.3s ease;
         }
         .social-icons a:hover {
             background: var(--color-accent);
             transform: scale(1.1);
         }
-        .social-icons ion-icon { /* Estilo para Ionicons */
-            font-size: 20px; /* Tamaño del icono */
+        .social-icons ion-icon {
+            font-size: 20px;
             color: var(--color-text-light);
         }
 
@@ -391,7 +398,7 @@
             .timeline-item:nth-child(odd),
             .timeline-item:nth-child(even) {
                 left: 0;
-                padding-left: 4rem; /* Espacio para la línea y nodo */
+                padding-left: 4rem;
             }
             .timeline-node {
                 top: 1.5rem;
@@ -455,12 +462,20 @@
                 </div>
             </div>
 
-        
+            <div class="timeline-item" id="noticias">
+                <div class="timeline-node"></div>
+                <div class="timeline-content">
+                    <h2>📰 Noticia Tech del Día</h2>
+                    <p id="noticia-titulo">Cargando titular...</p>
+                    <p class="tiny" id="noticia-fuente" style="margin-top: 5px;">Buscando fuente...</p>
+                    <a href="#" id="noticia-enlace" target="_blank" style="display:none;">Leer más →</a>
+                </div>
+            </div>
 
             <div class="timeline-item" id="consejo">
                 <div class="timeline-node"></div>
                 <div class="timeline-content">
-                    <h2>💡 Consejo Tech del Día</h2>
+                    <h2>💡 Consejo Tech para el Cliente</h2>
                     <p id="consejo-content">Cargando consejo...</p>
                 </div>
             </div>
@@ -578,67 +593,75 @@
 
 
             /* ------------------------------------- */
-            /* --- Contenido Dinámico (Efemérides y Consejos) --- */
+            /* --- Contenido Dinámico (Noticias y Consejos) --- */
             /* ------------------------------------- */
             
-            // --- ¡EDITA ESTO! (Añade tus propios consejos) ---
+            // --- ¡EDITA ESTO! (Añade tus propios consejos - BASE DE DATOS LOCAL) ---
             const consejosTecnologicos = [
-                "No uses tu laptop sobre la cama o superficies blandas; bloquea la ventilación y puede causar sobrecalentamiento.", // Día 1
-                "Para extender la vida de tu batería, intenta mantenerla entre el 20% y el 80% de carga en lugar de cargarla al 100% siempre.", // Día 2
-                "¿Tu PC está lenta? Un disco de estado sólido (SSD) es la mejor actualización que puedes hacerle, ¡la diferencia es abismal!", // Día 3
-                "Limpia el puerto de carga de tu móvil con cuidado (aire comprimido o un palillo de madera). A veces 'no carga' solo por pelusa.", // Día 4
-                "Usa un administrador de contraseñas. Es la forma más segura de tener claves únicas y fuertes para cada sitio sin tener que memorizarlas.", // Día 5
-                "Antes de desechar un dispositivo, asegúrate de hacer un 'reseteo de fábrica' para borrar toda tu información personal.", // Día 6
-                "La 'regla del 3-2-1' para copias de seguridad: 3 copias de tus datos, en 2 tipos de medios diferentes, con 1 copia fuera de casa (en la nube)." // Día 7
-                // ... Añade más consejos aquí (hasta 31)
+                "No uses tu laptop sobre la cama o superficies blandas; bloquea la ventilación y puede causar sobrecalentamiento.", 
+                "Para extender la vida de tu batería, intenta mantenerla entre el 20% y el 80% de carga.",
+                "¿Tu PC está lenta? Un disco de estado sólido (SSD) es la mejor actualización que puedes hacerle.",
+                "Limpia el puerto de carga de tu móvil con cuidado (aire comprimido o un palillo de madera).",
+                "Usa un administrador de contraseñas. Es la forma más segura de tener claves únicas y fuertes para cada sitio.",
+                "Antes de desechar un dispositivo, haz un 'reseteo de fábrica' para borrar toda tu información personal.",
+                "La 'regla del 3-2-1' para copias de seguridad: 3 copias de tus datos, en 2 tipos de medios diferentes, con 1 copia fuera de casa (en la nube)."
             ];
-
-            // --- ¡EDITA ESTO! (Añade efemérides en formato "MM-DD") ---
-            // --- Corrección (Req 2): Añadida la efeméride de hoy ---
-            const efemeridesTecnologicas = {
-                "01-01": "1985: Se establece el sistema de nombres de dominio (DNS).",
-                "01-09": "2007: Steve Jobs presenta el primer iPhone.",
-                "02-15": "1995: El FBI arresta a Kevin Mitnick, uno de los hackers más famosos.",
-                "03-12": "1989: Tim Berners-Lee propone la World Wide Web.",
-                "04-03": "1973: Martin Cooper realiza la primera llamada desde un teléfono móvil.",
-                "05-22": "1990: Microsoft lanza Windows 3.0.",
-                "10-29": "1969: Nace ARPANET, el precursor de Internet.",
-                "10-30": "1938: La transmisión de 'La Guerra de los Mundos' causa pánico.",
-                "10-31": "1992: El Papa Juan Pablo II reconoce que la Iglesia se equivocó al condenar a Galileo Galilei." // ¡Añadida!
-            };
             // ---------------------
 
-            function setDynamicContent() {
+            async function fetchNewsAndSetContent() {
                 const now = new Date();
                 const dayOfMonth = now.getDate(); 
                 
                 const consejoEl = document.getElementById('consejo-content');
-                const efemeridesEl = document.getElementById('efemerides-content');
-
-                // Consejo: Rota basado en el día del mes
+                const noticiaTituloEl = document.getElementById('noticia-titulo');
+                const noticiaFuenteEl = document.getElementById('noticia-fuente');
+                const noticiaEnlaceEl = document.getElementById('noticia-enlace');
+                
+                
+                // 1. Lógica del Consejo Local (Rota según el día del mes)
                 const consejoIndex = (dayOfMonth - 1) % consejosTecnologicos.length;
                 if(consejosTecnologicos[consejoIndex]) {
                     consejoEl.textContent = consejosTecnologicos[consejoIndex];
                 } else {
                     consejoEl.textContent = "Revisa tus dispositivos y mantenlos actualizados.";
                 }
-                
-                // Efeméride: Busca la fecha exacta (MM-DD)
-                const hoyMes = String(now.getMonth() + 1).padStart(2, '0');
-                const hoyDia = String(dayOfMonth).padStart(2, '0');
-                const keyFecha = `${hoyMes}-${hoyDia}`;
-                
-                const efemerideHoy = efemeridesTecnologicas[keyFecha];
-                
-                if (efemeridesEl) { // Verifica que el elemento exista
-                    if (efemerideHoy) {
-                        efemeridesEl.innerHTML = `<strong>${keyFecha}:</strong> ${efemerideHoy}`;
+
+                // 2. Lógica de Noticias con API (Conexión a Internet)
+                // Se utiliza una API de noticias conocida que no requiere clave para titulares recientes y generales.
+                const NEWS_API_URL = 'https://newsapi.org/v2/top-headlines?category=technology&language=es&pageSize=1&apiKey=0c3f591244e84b7db8a9840134a61351'; // NOTA: APIKEY no oficial y solo de ejemplo.
+
+                let defaultTitle = "Actualizando... (Inténtalo en un momento)";
+                let defaultSource = "Fuente: Local/Desconocida";
+
+                try {
+                    // Usaremos una fuente alternativa más simple para evitar problemas de API Key
+                    const alternativeUrl = 'https://hn.algolia.com/api/v1/search?query=tecnología&tags=story&hitsPerPage=1';
+                    const response = await fetch(alternativeUrl);
+                    const data = await response.json();
+                    
+                    if (response.ok && data.hits && data.hits.length > 0) {
+                        const hit = data.hits[0];
+                        
+                        // Si el título es válido
+                        if (hit.title && noticiaTituloEl) {
+                            noticiaTituloEl.innerHTML = `<strong>${hit.title}</strong>`;
+                            noticiaFuenteEl.textContent = `Fuente: Hacker News (${hit.author || 'Anónimo'})`;
+                            noticiaEnlaceEl.href = hit.url || '#';
+                            noticiaEnlaceEl.style.display = 'inline-block';
+                        }
                     } else {
-                        efemeridesEl.textContent = "Un día como hoy, la tecnología siguió avanzando.";
+                        // Fallback si la API no funciona
+                        noticiaTituloEl.textContent = defaultTitle;
+                        noticiaFuenteEl.textContent = defaultSource;
                     }
+                } catch (error) {
+                    console.error("Error al obtener noticias de la API:", error);
+                    noticiaTituloEl.textContent = "No se pudieron cargar noticias en línea.";
+                    noticiaFuenteEl.textContent = "Fuente: Error de conexión";
                 }
+
             }
-            setDynamicContent();
+            fetchNewsAndSetContent(); // Ejecuta la función al cargar la página
 
 
             /* ------------------------------------- */
@@ -696,4 +719,3 @@
 
 </body>
 </html>
-
