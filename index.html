@@ -18,7 +18,7 @@
         /* ------------------------- */
 
         :root {
-            /* Paleta de Colores (Verdes y estética "INFINITE") */
+            /* Paleta de Colores */
             --color-bg-dark: #0a0f0b;
             --color-bg-gradient: radial-gradient(at 0% 0%, hsla(140, 30%, 15%, 1) 0px, transparent 50%), radial-gradient(at 98% 1%, hsla(140, 40%, 10%, 1) 0px, transparent 50%);
             --color-container: #101511;
@@ -28,7 +28,7 @@
             --color-accent: #2ee59d;
             --color-accent-glow: rgba(46, 229, 157, 0.3);
 
-            /* Req 7: Tipografía */
+            /* Tipografía */
             --font-title: 'Rajdhani', sans-serif;
             --font-body: 'Montserrat', sans-serif;
         }
@@ -73,7 +73,6 @@
             text-decoration: none;
         }
         
-        /* Req 6: Estilo para el Logo */
         .nav-logo img {
             max-height: 40px; /* <-- AJUSTA LA ALTURA DE TU LOGO AQUÍ */
             display: block;
@@ -97,12 +96,15 @@
         /* --- Sección Hero --- */
         /* ------------------------- */
         
-        /* --- CÓMO AÑADIR IMAGEN DE FONDO (Req 8) ---
-           1. Descomenta la línea 'background-image' de abajo.
-           2. Reemplaza 'URL_DE_TU_IMAGEN.jpg' con la ruta a tu imagen.
-        */
         .hero-section {
-            /* background-image: url('URL_DE_TU_IMAGEN.jpg'); */
+            /* ================================================================
+            --- ¡IMAGEN DE FONDO CORREGIDA! (Req 1) ---
+            Asegúrate de que 'TU_IMAGEN_DE_FONDO.jpg' coincida EXACTAMENTE
+            con el nombre del archivo que subiste a GitHub.
+            ================================================================
+            */
+            background-image: url('TU_IMAGEN_DE_FONDO.jpg');
+            
             background-size: cover;
             background-position: center;
             background-attachment: fixed; /* Opcional: crea efecto parallax */
@@ -260,7 +262,7 @@
             color: var(--color-text-muted);
         }
         
-        .timeline-content p strong { /* Req 5: Estilo para fecha de efeméride */
+        .timeline-content p strong { /* Estilo para fecha de efeméride */
              color: var(--color-accent);
         }
 
@@ -279,7 +281,7 @@
         /* --- Estilos de Contenido --- */
         /* ------------------------- */
 
-        /* Req 4: Horarios (Nodo 1) */
+        /* Horarios (Nodo 1) */
         .horarios-list {
             list-style: none;
             padding-left: 0;
@@ -319,7 +321,6 @@
             gap: 1rem;
             margin-bottom: 1.5rem;
         }
-        /* Req 2: CSS para Círculos Perfectos */
         .social-icons a {
             display: flex; /* Usar flex para centrar */
             align-items: center;
@@ -409,7 +410,7 @@
     <header class="header-fixed" id="home">
         
         <a href="#home" class="nav-logo">
-            <img src="logo.png" alt="Logo de ZYRA">
+            <img src="TU_LOGO.png" alt="Logo de ZYRA">
         </a>
         <nav class="nav-links">
             <a href="#home">Home</a>
@@ -441,8 +442,6 @@
                 <div class="timeline-content">
                     <h2>📍 Nuestra Ubicación y Horarios</h2>
                     <p>Encontranos en: <strong>Hipólito Yrigoyen 435, Local 10</strong></p>
-                    
-                   
                     
                     <ul class="horarios-list">
                         <li><strong>Lunes:</strong> 08:00 a 12:00 y 16:00 a 20:00</li>
@@ -478,7 +477,7 @@
                     <h2>🛠️ Nuestros Servicios</h2>
                     <ul class="servicios-list">
                         <li>Servicio Técnico (Teléfonos, Tablets, PC, Notebooks, Impresoras)</li>
-	    <li>Recuperación de Datos</li>
+                        <li>Recuperación de Datos</li>
                         <li>Soporte de Software y Eliminación de Virus</li>
                         <li>Armamos tu PC Office o Gamer a Medida</li>
                     </ul>
@@ -527,12 +526,10 @@
         document.addEventListener('DOMContentLoaded', () => {
 
             /* ------------------------------------- */
-            /* --- Req 4: Lógica de Hora y Estado (Turno Partido) --- */
+            /* --- Lógica de Hora y Estado (Turno Partido) --- */
             /* ------------------------------------- */
             
-            // --- ¡EDITA ESTO! ---
-            // Define tu horario de atención aquí (Formato 24 horas)
-            // (Coincide con la lista del HTML)
+            // Horarios de atención (Formato 24 horas)
             const horarioAtencion = {
                 0: [], // Domingo (Cerrado)
                 1: [{ open: 8, close: 12 }, { open: 16, close: 20 }], // Lunes
@@ -567,7 +564,6 @@
                 
                 if (bloquesHoy.length > 0) {
                     for (const bloque of bloquesHoy) {
-                        // Verifica si la hora actual está dentro de CUALQUIER bloque
                         if (currentHour >= bloque.open && currentHour < bloque.close) {
                             estaAbierto = true;
                             break;
@@ -583,41 +579,44 @@
                     statusEl.className = 'closed';
                 }
             }
-            setInterval(updateTimeAndStatus, 1000); // Actualiza cada segundo
-            updateTimeAndStatus(); // Llama una vez al cargar
+            setInterval(updateTimeAndStatus, 1000); 
+            updateTimeAndStatus(); 
 
 
             /* ------------------------------------- */
-            /* --- Req 5 y 8: Contenido Dinámico (Efemérides y Consejos) --- */
+            /* --- Contenido Dinámico (Efemérides y Consejos) --- */
             /* ------------------------------------- */
             
-            // --- ¡EDITA ESTO! ---
-            // Añade tus propios consejos. El script elegirá uno basado en el día.
+            // --- ¡EDITA ESTO! (Añade tus propios consejos) ---
             const consejosTecnologicos = [
                 "No uses tu laptop sobre la cama o superficies blandas; bloquea la ventilación y puede causar sobrecalentamiento.", // Día 1
                 "Para extender la vida de tu batería, intenta mantenerla entre el 20% y el 80% de carga en lugar de cargarla al 100% siempre.", // Día 2
                 "¿Tu PC está lenta? Un disco de estado sólido (SSD) es la mejor actualización que puedes hacerle, ¡la diferencia es abismal!", // Día 3
                 "Limpia el puerto de carga de tu móvil con cuidado (aire comprimido o un palillo de madera). A veces 'no carga' solo por pelusa.", // Día 4
+                "Usa un administrador de contraseñas. Es la forma más segura de tener claves únicas y fuertes para cada sitio sin tener que memorizarlas.", // Día 5
+                "Antes de desechar un dispositivo, asegúrate de hacer un 'reseteo de fábrica' para borrar toda tu información personal.", // Día 6
+                "La 'regla del 3-2-1' para copias de seguridad: 3 copias de tus datos, en 2 tipos de medios diferentes, con 1 copia fuera de casa (en la nube)." // Día 7
                 // ... Añade más consejos aquí (hasta 31)
             ];
 
-            // --- ¡EDITA ESTO! (Req 8) ---
-            // Añade efemérides para cada día en formato "MM-DD".
+            // --- ¡EDITA ESTO! (Añade efemérides en formato "MM-DD") ---
+            // --- Corrección (Req 2): Añadida la efeméride de hoy ---
             const efemeridesTecnologicas = {
-                "01-01": "1985: Se establece el sistema de nombres de dominio (DNS).", // 1 de Enero
-                "01-09": "2007: Steve Jobs presenta el primer iPhone.", // 9 de Enero
-                "02-15": "1995: El FBI arresta a Kevin Mitnick, uno de los hackers más famosos.", // 15 de Febrero
-                "03-12": "1989: Tim Berners-Lee propone la World Wide Web.", // 12 de Marzo
-                "04-03": "1973: Martin Cooper realiza la primera llamada desde un teléfono móvil.", // 3 de Abril
-                "05-22": "1990: Microsoft lanza Windows 3.0.", // 22 de Mayo
-                "10-30": "1938: La transmisión de 'La Guerra de los Mundos' causa pánico, demostrando el poder de los medios masivos.", // 30 de Octubre
-                // ... Añade más (formato MM-DD)
+                "01-01": "1985: Se establece el sistema de nombres de dominio (DNS).",
+                "01-09": "2007: Steve Jobs presenta el primer iPhone.",
+                "02-15": "1995: El FBI arresta a Kevin Mitnick, uno de los hackers más famosos.",
+                "03-12": "1989: Tim Berners-Lee propone la World Wide Web.",
+                "04-03": "1973: Martin Cooper realiza la primera llamada desde un teléfono móvil.",
+                "05-22": "1990: Microsoft lanza Windows 3.0.",
+                "10-29": "1969: Nace ARPANET, el precursor de Internet.",
+                "10-30": "1938: La transmisión de 'La Guerra de los Mundos' causa pánico.",
+                "10-31": "1992: El Papa Juan Pablo II reconoce que la Iglesia se equivocó al condenar a Galileo Galilei." // ¡Añadida!
             };
             // ---------------------
 
             function setDynamicContent() {
                 const now = new Date();
-                const dayOfMonth = now.getDate(); // Día del mes (1-31)
+                const dayOfMonth = now.getDate(); 
                 
                 const consejoEl = document.getElementById('consejo-content');
                 const efemeridesEl = document.getElementById('efemerides-content');
@@ -627,7 +626,7 @@
                 if(consejosTecnologicos[consejoIndex]) {
                     consejoEl.textContent = consejosTecnologicos[consejoIndex];
                 } else {
-                    consejoEl.textContent = "Revisa tus dispositivos y mantenlos actualizados."; // Fallback
+                    consejoEl.textContent = "Revisa tus dispositivos y mantenlos actualizados.";
                 }
                 
                 // Efeméride: Busca la fecha exacta (MM-DD)
@@ -637,11 +636,12 @@
                 
                 const efemerideHoy = efemeridesTecnologicas[keyFecha];
                 
-                if (efemerideHoy) {
-                    // Req 5: Mostrar la fecha junto con la efeméride
-                    efemeridesEl.innerHTML = `<strong>${keyFecha}:</strong> ${efemerideHoy}`;
-                } else {
-                    efemeridesEl.textContent = "Un día como hoy, la tecnología siguió avanzando. (Añade una efeméride para esta fecha en el código).";
+                if (efemeridesEl) { // Verifica que el elemento exista
+                    if (efemerideHoy) {
+                        efemeridesEl.innerHTML = `<strong>${keyFecha}:</strong> ${efemerideHoy}`;
+                    } else {
+                        efemeridesEl.textContent = "Un día como hoy, la tecnología siguió avanzando.";
+                    }
                 }
             }
             setDynamicContent();
@@ -659,7 +659,7 @@
                     }
                 });
             }, {
-                threshold: 0.1 // Se activa cuando el 10% del item es visible
+                threshold: 0.1 
             });
 
             timelineItems.forEach(item => {
@@ -667,7 +667,7 @@
             });
             
             /* ------------------------------------- */
-            /* --- Req 6: Navegación Suave (Home Fix) --- */
+            /* --- Navegación Suave (Home Fix) --- */
             /* ------------------------------------- */
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
