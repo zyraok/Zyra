@@ -97,9 +97,7 @@
         /* ------------------------- */
         
         .hero-section {
-            /* REEMPLAZA 'logo.png' si usas otra imagen de fondo */
             /* background-image: url('URL_DE_TU_IMAGEN.jpg'); */
-            
             background-size: cover;
             background-position: center;
             background-attachment: fixed; 
@@ -110,6 +108,7 @@
             justify-content: center;
             min-height: 100vh;
             padding: 8rem 2rem 2rem 2rem;
+            text-align: center; /* Centrar el texto principal */
         }
 
         .hero-title {
@@ -170,37 +169,23 @@
             border-radius: 6px;
             box-shadow: 0 0 20px var(--color-accent-glow);
             transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
         }
 
         .btn-cta:hover {
             transform: translateY(-3px);
             box-shadow: 0 5px 30px var(--color-accent-glow);
         }
-
-        /* Estilo específico para el botón del mini-juego */
-        .game-button-style {
-            padding: 10px 20px;
-            background-color: var(--color-accent);
-            border: none;
-            border-radius: 6px;
-            color: var(--color-bg-dark);
-            font-family: var(--font-title);
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.1s;
-            box-shadow: 0 0 10px var(--color-accent-glow);
-            margin-top: 10px;
+        
+        /* Estilo para el botón de inicio del juego */
+        #startGameButton {
+            margin-top: 1rem;
+            padding: 0.5rem 1.5rem;
+            font-size: 1rem;
+            font-family: var(--font-body);
+            font-weight: 600;
         }
-        .game-button-style:disabled {
-            background-color: var(--color-text-muted);
-            cursor: not-allowed;
-            box-shadow: none;
-        }
-        .game-button-style:active {
-            transform: scale(0.98);
-        }
-
 
         /* ------------------------- */
         /* --- Contenedor del Timeline --- */
@@ -360,6 +345,33 @@
             color: var(--color-text-light);
         }
 
+        /* Estilo Específico para el Canvas del Juego */
+        .game-canvas-wrapper {
+            /* Contenedor principal que centra el canvas y el botón */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .game-canvas-container {
+            /* Centra el canvas dentro del content-box */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-top: 10px;
+        }
+        #myCanvas {
+            background: #000000;
+            border: 1px solid var(--color-accent);
+            border-radius: 4px;
+            touch-action: none; 
+        }
+        .game-info {
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--color-text-muted);
+            margin-top: 10px;
+        }
+
         /* Footer */
         .footer {
             text-align: center;
@@ -477,11 +489,15 @@
             <div class="timeline-item" id="juego-retro">
                 <div class="timeline-node"></div>
                 <div class="timeline-content">
-                    <h2>👾 Mini Juego Retro</h2>
-                    <p>¡Desafío Diario! Haz clic en el botón antes de que el contador llegue a cero.</p>
-                    <p id="game-status" style="font-size: 1.5rem; font-family: var(--font-title); color: var(--color-accent);">Tiempo restante: <span id="game-timer">10</span>s</p>
-                    <button id="game-button" class="game-button-style">¡Click Aquí!</button>
-                    <p id="game-result" style="margin-top: 10px; color: var(--color-text-light);"></p>
+                    <h2>👾 Mini Juego Retro (Breakout)</h2>
+                    <p>Usa las flechas (← →) o el mouse/touch para mover la paleta.</p>
+                    <div class="game-canvas-wrapper">
+                        <div class="game-canvas-container">
+                            <canvas id="myCanvas" width="260" height="160"></canvas>
+                        </div>
+                        <button id="startGameButton" class="btn-cta">Iniciar Juego</button>
+                    </div>
+                    <p class="game-info">Reinicia la página si pierdes o ganas.</p>
                 </div>
             </div>
 
@@ -609,8 +625,7 @@
             /* --- Contenido Dinámico (Consejos) --- */
             /* ------------------------------------- */
             
-            // --- ¡EDITA ESTO! ---
-            // Añade tus propios consejos. El script elegirá uno basado en el día.
+            // Consejos para rotar diariamente
             const consejosTecnologicos = [
                 "No uses tu laptop sobre la cama o superficies blandas; bloquea la ventilación y puede causar sobrecalentamiento.", 
                 "Para extender la vida de tu batería, intenta mantenerla entre el 20% y el 80% de carga en lugar de cargarla al 100% siempre.", 
@@ -620,8 +635,7 @@
                 "Antes de desechar un dispositivo, haz un 'reseteo de fábrica' para borrar toda tu información personal.", 
                 "La 'regla del 3-2-1' para copias de seguridad: 3 copias de tus datos, en 2 tipos de medios diferentes, con 1 copia fuera de casa (en la nube)."
             ];
-            // ---------------------
-
+            
             function setDynamicContent() {
                 const now = new Date();
                 const dayOfMonth = now.getDate(); 
@@ -639,56 +653,227 @@
             setDynamicContent();
 
             /* ------------------------------------- */
-            /* --- Lógica del Mini Juego Retro --- */
+            /* --- Lógica del Mini Juego Retro (Breakout) --- */
             /* ------------------------------------- */
-            const timerEl = document.getElementById('game-timer');
-            const buttonEl = document.getElementById('game-button');
-            const resultEl = document.getElementById('game-result');
-            const statusEl = document.getElementById('game-status');
 
-            let timeLeft = 10;
-            let gameInterval;
-            let gameActive = true;
+            const canvas = document.getElementById("myCanvas");
+            const ctx = canvas.getContext("2d");
+            const startGameButton = document.getElementById("startGameButton");
+            
+            // Dimensiones del juego
+            const canvasWidth = 260;
+            const canvasHeight = 160;
 
-            function endGame(win) {
-                clearInterval(gameInterval);
-                buttonEl.disabled = true;
-                buttonEl.textContent = "Finalizado";
-                gameActive = false;
+            // Variables de la Pelota
+            let ballRadius = 3;
+            let x = canvasWidth / 2;
+            let y = canvasHeight - 10;
+            let dx = Math.random() < 0.5 ? -1 : 1; 
+            let dy = -1;
 
-                if (win) {
-                    resultEl.innerHTML = "🏆 **¡GANASTE!** Demostraste reflejos ZYRA. Vuelve mañana por otro reto.";
-                    resultEl.style.color = 'var(--color-accent)';
-                    statusEl.style.color = 'var(--color-accent)';
-                } else {
-                    resultEl.innerHTML = "☠️ **¡TIEMPO AGOTADO!** El sistema te ganó. Reinicia la página para intentarlo de nuevo.";
-                    resultEl.style.color = '#ff6347'; 
-                    statusEl.style.color = '#ff6347';
-                }
-            }
+            // Variables de la Paleta
+            let paddleHeight = 4;
+            let paddleWidth = 30; // Tamaño ajustado para dificultad
+            let paddleX = (canvasWidth - paddleWidth) / 2;
 
-            function updateTimer() {
-                if (!gameActive) return;
+            // Teclas
+            let rightPressed = false;
+            let leftPressed = false;
 
-                timeLeft -= 1;
-                timerEl.textContent = timeLeft;
+            // Ladrillos
+            const brickRowCount = 3; 
+            const brickColumnCount = 6; 
+            const brickWidth = 36;
+            const brickHeight = 6;
+            const brickPadding = 2;
+            const brickOffsetTop = 15;
+            const brickOffsetLeft = 17; // *** CORRECCIÓN CLAVE: Centrado de ladrillos
+            let bricks = [];
+            let score = 0;
+            let gameStarted = false; 
 
-                if (timeLeft <= 0) {
-                    endGame(false);
-                }
-            }
-
-            // Iniciar el juego
-            if (timerEl && buttonEl) {
-                buttonEl.addEventListener('click', () => {
-                    if (gameActive) {
-                        endGame(true);
+            // Inicializar Ladrillos
+            function initBricks() {
+                for (let c = 0; c < brickColumnCount; c++) {
+                    bricks[c] = [];
+                    for (let r = 0; r < brickRowCount; r++) {
+                        bricks[c][r] = { x: 0, y: 0, status: 1 };
                     }
-                });
-                gameInterval = setInterval(updateTimer, 1000);
+                }
             }
-            // ---------------------
+            initBricks();
 
+            // Dibujar mensaje de inicio antes de que comience el juego
+            function drawInitialMessage() {
+                ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+                ctx.font = "14px Rajdhani";
+                ctx.fillStyle = "#9aa6a1"; // muted color
+                ctx.textAlign = "center";
+                ctx.fillText("Presiona INICIAR JUEGO", canvasWidth / 2, canvasHeight / 2);
+            }
+            drawInitialMessage(); 
+
+
+            // Funciones de Dibujo
+            function drawBall() {
+                ctx.beginPath();
+                ctx.arc(x, y, ballRadius, 0, Math.PI * 2);
+                ctx.fillStyle = "#ff6347"; 
+                ctx.fill();
+                ctx.closePath();
+            }
+
+            function drawPaddle() {
+                ctx.beginPath();
+                ctx.rect(paddleX, canvasHeight - paddleHeight - 5, paddleWidth, paddleHeight); 
+                ctx.fillStyle = "#2ee59d"; 
+                ctx.fill();
+                ctx.closePath();
+            }
+
+            function drawBricks() {
+                for (let c = 0; c < brickColumnCount; c++) {
+                    for (let r = 0; r < brickRowCount; r++) {
+                        if (bricks[c][r].status === 1) {
+                            let brickX = (c * (brickWidth + brickPadding)) + brickOffsetLeft;
+                            let brickY = (r * (brickHeight + brickPadding)) + brickOffsetTop;
+                            bricks[c][r].x = brickX;
+                            bricks[c][r].y = brickY;
+                            ctx.beginPath();
+                            ctx.rect(brickX, brickY, brickWidth, brickHeight);
+                            ctx.fillStyle = "#2ee59d"; 
+                            ctx.fill();
+                            ctx.closePath();
+                        }
+                    }
+                }
+            }
+
+            function drawScore() {
+                ctx.font = "12px Rajdhani"; 
+                ctx.fillStyle = "#2ee59d";
+                ctx.textAlign = "left"; 
+                ctx.fillText("Score: " + score, 8, 12);
+            }
+            
+            function collisionDetection() {
+                for (let c = 0; c < brickColumnCount; c++) {
+                    for (let r = 0; r < brickRowCount; r++) {
+                        let b = bricks[c][r];
+                        if (b.status === 1) {
+                            if (x > b.x && x < b.x + brickWidth && y > b.y && y < b.y + brickHeight) {
+                                dy = -dy;
+                                b.status = 0;
+                                score++;
+                                if (score === brickRowCount * brickColumnCount) {
+                                    alert("¡GANASTE! Puntuación Final: " + score);
+                                    gameStarted = false; 
+                                    document.location.reload();
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
+            // Función Principal de Dibujo/Loop
+            function draw() {
+                if (!gameStarted) return; 
+
+                ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+                drawBricks();
+                drawBall();
+                drawPaddle();
+                drawScore();
+                collisionDetection();
+
+                x += dx;
+                y += dy;
+
+                // Colisión con paredes laterales
+                if (x + dx > canvasWidth - ballRadius || x + dx < ballRadius) {
+                    dx = -dx;
+                }
+
+                // Colisión con techo
+                if (y + dy < ballRadius + 10) { 
+                    dy = -dy;
+                } 
+                // Colisión con suelo (Game Over)
+                else if (y + dy > canvasHeight - ballRadius - 5) { 
+                    // Colisión con la paleta
+                    if (x > paddleX && x < paddleX + paddleWidth) {
+                        dy = -dy;
+                    } else {
+                        // Game Over
+                        alert("GAME OVER. Puntuación Final: " + score);
+                        gameStarted = false; 
+                        document.location.reload(); 
+                    }
+                }
+
+                // Movimiento de la paleta
+                if (rightPressed && paddleX < canvasWidth - paddleWidth) {
+                    paddleX += 4; 
+                } else if (leftPressed && paddleX > 0) {
+                    paddleX -= 4;
+                }
+
+                requestAnimationFrame(draw);
+            }
+
+            // --- LÓGICA DE INICIO DEL JUEGO ---
+            startGameButton.addEventListener('click', () => {
+                if (!gameStarted) {
+                    gameStarted = true;
+                    startGameButton.disabled = true;
+                    startGameButton.textContent = "Jugando...";
+                    draw(); // Iniciar el bucle de juego
+                }
+            });
+            // ---------------------------------
+
+
+            // Event Listeners (Teclado)
+            document.addEventListener("keydown", e => {
+                if (!gameStarted) return;
+                if (e.key === "Right" || e.key === "ArrowRight") {
+                    rightPressed = true;
+                } else if (e.key === "Left" || e.key === "ArrowLeft") {
+                    leftPressed = true;
+                }
+            });
+            document.addEventListener("keyup", e => {
+                if (!gameStarted) return;
+                if (e.key === "Right" || e.key === "ArrowRight") {
+                    rightPressed = false;
+                } else if (e.key === "Left" || e.key === "ArrowLeft") {
+                    leftPressed = false;
+                }
+            });
+
+            // Event Listeners (Mouse/Touch) - Movimiento relativo
+            function movePaddle(e) {
+                if (!gameStarted) return;
+                const relativeX = e.clientX || (e.touches && e.touches[0] ? e.touches[0].clientX : null);
+                
+                if (relativeX !== null) {
+                    const rect = canvas.getBoundingClientRect();
+                    let targetX = relativeX - rect.left;
+                    
+                    if (targetX > 0 && targetX < canvasWidth) {
+                        paddleX = targetX - paddleWidth / 2;
+                        if (paddleX < 0) paddleX = 0;
+                        if (paddleX > canvasWidth - paddleWidth) paddleX = canvasWidth - paddleWidth;
+                    }
+                }
+            }
+
+            canvas.addEventListener("mousemove", movePaddle);
+            canvas.addEventListener("touchmove", (e) => {
+                e.preventDefault(); 
+                movePaddle(e);
+            }, { passive: false }); 
 
             /* ------------------------------------- */
             /* --- Animación al Hacer Scroll --- */
