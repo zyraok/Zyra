@@ -489,7 +489,7 @@
             <div class="timeline-item" id="juego-retro">
                 <div class="timeline-node"></div>
                 <div class="timeline-content">
-                    <h2>👾 Mini Juego Retro (Breakout)</h2>
+                    <h2>👾 Mini Juego (Breakout)</h2>
                     <p>Usa las flechas (← →) o el mouse/touch para mover la paleta.</p>
                     <div class="game-canvas-wrapper">
                         <div class="game-canvas-container">
@@ -668,12 +668,17 @@
             let ballRadius = 3;
             let x = canvasWidth / 2;
             let y = canvasHeight - 10;
-            let dx = Math.random() < 0.5 ? -1 : 1; 
-            let dy = -1;
+            
+            // *** CAMBIO: Aumento de velocidad y aleatoriedad inicial
+            const ballSpeed = 1.5; // Velocidad base
+            // dx: Aleatoriedad entre 1.5 y 2.0 para el ángulo inicial
+            let dx = (Math.random() * 1.5 + 1.5) * (Math.random() < 0.5 ? -1 : 1); 
+            let dy = -ballSpeed; // Velocidad vertical inicial
+            // *** FIN CAMBIO
 
             // Variables de la Paleta
             let paddleHeight = 4;
-            let paddleWidth = 30; // Tamaño ajustado para dificultad
+            let paddleWidth = 30; // Mantenemos el tamaño ajustado
             let paddleX = (canvasWidth - paddleWidth) / 2;
 
             // Teclas
@@ -687,7 +692,7 @@
             const brickHeight = 6;
             const brickPadding = 2;
             const brickOffsetTop = 15;
-            const brickOffsetLeft = 17; // *** CORRECCIÓN CLAVE: Centrado de ladrillos
+            const brickOffsetLeft = 17; // Centrado de ladrillos
             let bricks = [];
             let score = 0;
             let gameStarted = false; 
@@ -756,13 +761,28 @@
                 ctx.fillText("Score: " + score, 8, 12);
             }
             
+            // *** CAMBIO: Lógica de colisión avanzada para rebotes variados
             function collisionDetection() {
                 for (let c = 0; c < brickColumnCount; c++) {
                     for (let r = 0; r < brickRowCount; r++) {
                         let b = bricks[c][r];
                         if (b.status === 1) {
-                            if (x > b.x && x < b.x + brickWidth && y > b.y && y < b.y + brickHeight) {
-                                dy = -dy;
+                            // Detección de colisión más precisa (usando radio de la bola)
+                            if (x + ballRadius > b.x && x - ballRadius < b.x + brickWidth && 
+                                y + ballRadius > b.y && y - ballRadius < b.y + brickHeight) {
+                                
+                                // Determinar si el golpe fue principalmente vertical u horizontal
+                                let prevX = x - dx;
+                                let prevY = y - dy;
+
+                                if (prevY <= b.y || prevY >= b.y + brickHeight) {
+                                    // Hit vertical (arriba o abajo)
+                                    dy = -dy;
+                                } else {
+                                    // Hit horizontal (lados)
+                                    dx = -dx;
+                                }
+                                
                                 b.status = 0;
                                 score++;
                                 if (score === brickRowCount * brickColumnCount) {
@@ -775,6 +795,7 @@
                     }
                 }
             }
+            // *** FIN CAMBIO
             
             // Función Principal de Dibujo/Loop
             function draw() {
@@ -803,7 +824,18 @@
                 else if (y + dy > canvasHeight - ballRadius - 5) { 
                     // Colisión con la paleta
                     if (x > paddleX && x < paddleX + paddleWidth) {
-                        dy = -dy;
+                        
+                        // *** CAMBIO: Lógica de rebote dinámico en paleta
+                        let hitPoint = x - (paddleX + paddleWidth / 2); // Distancia al centro de la paleta
+                        let normalizedHit = hitPoint / (paddleWidth / 2); // Valor de -1 a 1
+                        
+                        // Ajusta la velocidad horizontal (dx) en función del golpe. Máx 80% de ballSpeed.
+                        dx = normalizedHit * ballSpeed * 0.8; 
+                        
+                        // Invierte la velocidad vertical (dy), manteniendo la magnitud
+                        dy = -Math.abs(dy); 
+                        // *** FIN CAMBIO
+                        
                     } else {
                         // Game Over
                         alert("GAME OVER. Puntuación Final: " + score);
