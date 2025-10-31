@@ -18,7 +18,7 @@
         /* ------------------------- */
 
         :root {
-            /* Paleta de Colores */
+            /* Paleta de Colores (Verdes y estética "INFINITE") */
             --color-bg-dark: #0a0f0b;
             --color-bg-gradient: radial-gradient(at 0% 0%, hsla(140, 30%, 15%, 1) 0px, transparent 50%), radial-gradient(at 98% 1%, hsla(140, 40%, 10%, 1) 0px, transparent 50%);
             --color-container: #101511;
@@ -63,7 +63,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 2.5rem;
+            padding: 1rem 2.5rem; 
             background: rgba(10, 15, 11, 0.7);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--color-border);
@@ -96,19 +96,20 @@
         /* --- Sección Hero --- */
         /* ------------------------- */
         
+        /* --- CÓMO AÑADIR IMAGEN DE FONDO (Req 8) ---
+           1. Descomenta la línea 'background-image' de abajo.
+           2. Reemplaza 'URL_DE_TU_IMAGEN.jpg' con la ruta a tu imagen.
+        */
         .hero-section {
-            /* REEMPLAZA 'TU_IMAGEN_DE_FONDO.jpg' */
-            background-image: url('TU_IMAGEN_DE_FONDO.jpg');
-            
+            /* background-image: url('URL_DE_TU_IMAGEN.jpg'); */
             background-size: cover;
             background-position: center;
-            background-attachment: fixed;
+            background-attachment: fixed; 
             
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            text-align: center;
             min-height: 100vh;
             padding: 8rem 2rem 2rem 2rem;
         }
@@ -177,6 +178,30 @@
             transform: translateY(-3px);
             box-shadow: 0 5px 30px var(--color-accent-glow);
         }
+
+        /* Estilo específico para el botón del mini-juego */
+        .game-button-style {
+            padding: 10px 20px;
+            background-color: var(--color-accent);
+            border: none;
+            border-radius: 6px;
+            color: var(--color-bg-dark);
+            font-family: var(--font-title);
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.1s;
+            box-shadow: 0 0 10px var(--color-accent-glow);
+        }
+        .game-button-style:disabled {
+            background-color: var(--color-text-muted);
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+        .game-button-style:active {
+            transform: scale(0.98);
+        }
+
 
         /* ------------------------- */
         /* --- Contenedor del Timeline --- */
@@ -257,20 +282,8 @@
             color: var(--color-text-muted);
         }
         
-        .timeline-content p strong {
+        .timeline-content p strong { 
              color: var(--color-accent);
-        }
-
-        /* Estilo específico para Noticias */
-        .timeline-content a {
-            color: var(--color-accent);
-            text-decoration: none;
-            font-weight: 600;
-            display: inline-block;
-            margin-top: 10px;
-        }
-        .timeline-content a:hover {
-            text-decoration: underline;
         }
 
         /* Animación de Scroll */
@@ -329,22 +342,22 @@
             margin-bottom: 1.5rem;
         }
         .social-icons a {
-            display: flex;
+            display: flex; 
             align-items: center;
             justify-content: center;
-            width: 40px;
-            height: 40px;
-            padding: 0;
+            width: 40px;  
+            height: 40px; 
+            padding: 0;   
             background: var(--color-border);
-            border-radius: 50%;
+            border-radius: 50%; 
             transition: background 0.3s ease, transform 0.3s ease;
         }
         .social-icons a:hover {
             background: var(--color-accent);
             transform: scale(1.1);
         }
-        .social-icons ion-icon {
-            font-size: 20px;
+        .social-icons ion-icon { 
+            font-size: 20px; 
             color: var(--color-text-light);
         }
 
@@ -398,7 +411,7 @@
             .timeline-item:nth-child(odd),
             .timeline-item:nth-child(even) {
                 left: 0;
-                padding-left: 4rem;
+                padding-left: 4rem; 
             }
             .timeline-node {
                 top: 1.5rem;
@@ -417,7 +430,7 @@
     <header class="header-fixed" id="home">
         
         <a href="#home" class="nav-logo">
-            <img src="TU_LOGO.png" alt="Logo de ZYRA">
+            <img src="logo.png" alt="Logo de ZYRA">
         </a>
         <nav class="nav-links">
             <a href="#home">Home</a>
@@ -462,20 +475,21 @@
                 </div>
             </div>
 
-            <div class="timeline-item" id="noticias">
+            <div class="timeline-item" id="juego-retro">
                 <div class="timeline-node"></div>
                 <div class="timeline-content">
-                    <h2>📰 Noticia Tech del Día</h2>
-                    <p id="noticia-titulo">Cargando titular...</p>
-                    <p class="tiny" id="noticia-fuente" style="margin-top: 5px;">Buscando fuente...</p>
-                    <a href="#" id="noticia-enlace" target="_blank" style="display:none;">Leer más →</a>
+                    <h2>👾 Mini Juego Retro</h2>
+                    <p>¡Desafío Diario! Haz clic en el botón antes de que el contador llegue a cero.</p>
+                    <p id="game-status" style="font-size: 1.5rem; font-family: var(--font-title); color: var(--color-accent);">Tiempo restante: <span id="game-timer">10</span>s</p>
+                    <button id="game-button" class="game-button-style">¡Click Aquí!</button>
+                    <p id="game-result" style="margin-top: 10px; color: var(--color-text-light);"></p>
                 </div>
             </div>
 
             <div class="timeline-item" id="consejo">
                 <div class="timeline-node"></div>
                 <div class="timeline-content">
-                    <h2>💡 Consejo Tech para el Cliente</h2>
+                    <h2>💡 Consejo Tech del Día</h2>
                     <p id="consejo-content">Cargando consejo...</p>
                 </div>
             </div>
@@ -486,7 +500,7 @@
                     <h2>🛠️ Nuestros Servicios</h2>
                     <ul class="servicios-list">
                         <li>Servicio Técnico (Teléfonos, Tablets, PC, Notebooks, Impresoras)</li>
-                        <li>Recuperación de Datos</li>
+	                    <li>Recuperación de Datos</li>
                         <li>Soporte de Software y Eliminación de Virus</li>
                         <li>Armamos tu PC Office o Gamer a Medida</li>
                     </ul>
@@ -538,7 +552,7 @@
             /* --- Lógica de Hora y Estado (Turno Partido) --- */
             /* ------------------------------------- */
             
-            // Horarios de atención (Formato 24 horas)
+            // Define tu horario de atención aquí (Formato 24 horas)
             const horarioAtencion = {
                 0: [], // Domingo (Cerrado)
                 1: [{ open: 8, close: 12 }, { open: 16, close: 20 }], // Lunes
@@ -556,7 +570,7 @@
 
             function updateTimeAndStatus() {
                 const now = new Date();
-                const dayOfWeek = now.getDay(); // 0 = Domingo, 1 = Lunes, etc.
+                const dayOfWeek = now.getDay(); 
                 const currentHour = now.getHours();
 
                 // Formatear Fecha y Día en Español
@@ -593,75 +607,88 @@
 
 
             /* ------------------------------------- */
-            /* --- Contenido Dinámico (Noticias y Consejos) --- */
+            /* --- Contenido Dinámico (Consejos) --- */
             /* ------------------------------------- */
             
-            // --- ¡EDITA ESTO! (Añade tus propios consejos - BASE DE DATOS LOCAL) ---
+            // --- ¡EDITA ESTO! ---
+            // Añade tus propios consejos. El script elegirá uno basado en el día.
             const consejosTecnologicos = [
                 "No uses tu laptop sobre la cama o superficies blandas; bloquea la ventilación y puede causar sobrecalentamiento.", 
-                "Para extender la vida de tu batería, intenta mantenerla entre el 20% y el 80% de carga.",
-                "¿Tu PC está lenta? Un disco de estado sólido (SSD) es la mejor actualización que puedes hacerle.",
-                "Limpia el puerto de carga de tu móvil con cuidado (aire comprimido o un palillo de madera).",
-                "Usa un administrador de contraseñas. Es la forma más segura de tener claves únicas y fuertes para cada sitio.",
-                "Antes de desechar un dispositivo, haz un 'reseteo de fábrica' para borrar toda tu información personal.",
+                "Para extender la vida de tu batería, intenta mantenerla entre el 20% y el 80% de carga en lugar de cargarla al 100% siempre.", 
+                "¿Tu PC está lenta? Un disco de estado sólido (SSD) es la mejor actualización que puedes hacerle, ¡la diferencia es abismal!", 
+                "Limpia el puerto de carga de tu móvil con cuidado (aire comprimido o un palillo de madera). A veces 'no carga' solo por pelusa.", 
+                "Usa un administrador de contraseñas. Es la forma más segura de tener claves únicas y fuertes para cada sitio sin tener que memorizarlas.", 
+                "Antes de desechar un dispositivo, haz un 'reseteo de fábrica' para borrar toda tu información personal.", 
                 "La 'regla del 3-2-1' para copias de seguridad: 3 copias de tus datos, en 2 tipos de medios diferentes, con 1 copia fuera de casa (en la nube)."
             ];
             // ---------------------
 
-            async function fetchNewsAndSetContent() {
+            function setDynamicContent() {
                 const now = new Date();
                 const dayOfMonth = now.getDate(); 
                 
                 const consejoEl = document.getElementById('consejo-content');
-                const noticiaTituloEl = document.getElementById('noticia-titulo');
-                const noticiaFuenteEl = document.getElementById('noticia-fuente');
-                const noticiaEnlaceEl = document.getElementById('noticia-enlace');
-                
-                
-                // 1. Lógica del Consejo Local (Rota según el día del mes)
+
+                // Consejo: Rota basado en el día del mes
                 const consejoIndex = (dayOfMonth - 1) % consejosTecnologicos.length;
                 if(consejosTecnologicos[consejoIndex]) {
                     consejoEl.textContent = consejosTecnologicos[consejoIndex];
                 } else {
-                    consejoEl.textContent = "Revisa tus dispositivos y mantenlos actualizados.";
+                    consejoEl.textContent = "Revisa tus dispositivos y mantenlos actualizados."; // Fallback
                 }
-
-                // 2. Lógica de Noticias con API (Conexión a Internet)
-                // Se utiliza una API de noticias conocida que no requiere clave para titulares recientes y generales.
-                const NEWS_API_URL = 'https://newsapi.org/v2/top-headlines?category=technology&language=es&pageSize=1&apiKey=0c3f591244e84b7db8a9840134a61351'; // NOTA: APIKEY no oficial y solo de ejemplo.
-
-                let defaultTitle = "Actualizando... (Inténtalo en un momento)";
-                let defaultSource = "Fuente: Local/Desconocida";
-
-                try {
-                    // Usaremos una fuente alternativa más simple para evitar problemas de API Key
-                    const alternativeUrl = 'https://hn.algolia.com/api/v1/search?query=tecnología&tags=story&hitsPerPage=1';
-                    const response = await fetch(alternativeUrl);
-                    const data = await response.json();
-                    
-                    if (response.ok && data.hits && data.hits.length > 0) {
-                        const hit = data.hits[0];
-                        
-                        // Si el título es válido
-                        if (hit.title && noticiaTituloEl) {
-                            noticiaTituloEl.innerHTML = `<strong>${hit.title}</strong>`;
-                            noticiaFuenteEl.textContent = `Fuente: Hacker News (${hit.author || 'Anónimo'})`;
-                            noticiaEnlaceEl.href = hit.url || '#';
-                            noticiaEnlaceEl.style.display = 'inline-block';
-                        }
-                    } else {
-                        // Fallback si la API no funciona
-                        noticiaTituloEl.textContent = defaultTitle;
-                        noticiaFuenteEl.textContent = defaultSource;
-                    }
-                } catch (error) {
-                    console.error("Error al obtener noticias de la API:", error);
-                    noticiaTituloEl.textContent = "No se pudieron cargar noticias en línea.";
-                    noticiaFuenteEl.textContent = "Fuente: Error de conexión";
-                }
-
             }
-            fetchNewsAndSetContent(); // Ejecuta la función al cargar la página
+            setDynamicContent();
+
+            /* ------------------------------------- */
+            /* --- Lógica del Mini Juego Retro --- */
+            /* ------------------------------------- */
+            const timerEl = document.getElementById('game-timer');
+            const buttonEl = document.getElementById('game-button');
+            const resultEl = document.getElementById('game-result');
+            const statusEl = document.getElementById('game-status');
+
+            let timeLeft = 10;
+            let gameInterval;
+            let gameActive = true;
+
+            function endGame(win) {
+                clearInterval(gameInterval);
+                buttonEl.disabled = true;
+                buttonEl.textContent = "Finalizado";
+                gameActive = false;
+
+                if (win) {
+                    resultEl.innerHTML = "🏆 **¡GANASTE!** Demostraste reflejos ZYRA. Vuelve mañana por otro reto.";
+                    resultEl.style.color = 'var(--color-accent)';
+                    statusEl.style.color = 'var(--color-accent)';
+                } else {
+                    resultEl.innerHTML = "☠️ **¡TIEMPO AGOTADO!** El sistema te ganó. Reinicia la página para intentarlo de nuevo.";
+                    resultEl.style.color = '#ff6347'; 
+                    statusEl.style.color = '#ff6347';
+                }
+            }
+
+            function updateTimer() {
+                if (!gameActive) return;
+
+                timeLeft -= 1;
+                timerEl.textContent = timeLeft;
+
+                if (timeLeft <= 0) {
+                    endGame(false);
+                }
+            }
+
+            // Iniciar el juego
+            if (timerEl && buttonEl) {
+                buttonEl.addEventListener('click', () => {
+                    if (gameActive) {
+                        endGame(true);
+                    }
+                });
+                gameInterval = setInterval(updateTimer, 1000);
+            }
+            // ---------------------
 
 
             /* ------------------------------------- */
