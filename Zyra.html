@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZYRA - Venta y Reparación de Tecnología</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+    <style>
+        /* ------------------------- */
+        /* --- ESTILO VISUAL (CSS) --- */
+        /* ------------------------- */
+
+        :root {
+            /* Paleta de Colores (Verdes y estética "INFINITE") */
+            --color-bg-dark: #0a0f0b;
+            --color-bg-gradient: radial-gradient(at 0% 0%, hsla(140, 30%, 15%, 1) 0px, transparent 50%), radial-gradient(at 98% 1%, hsla(140, 40%, 10%, 1) 0px, transparent 50%);
+            --color-container: #101511;
+            --color-border: rgba(46, 229, 157, 0.15);
+            --color-text-light: #e6edf3;
+            --color-text-muted: #8b949e;
+            --color-accent: #2ee59d;
+            --color-accent-glow: rgba(46, 229, 157, 0.3);
+
+            /* Req 7: Tipografía */
+            --font-title: 'Rajdhani', sans-serif;
+            --font-body: 'Montserrat', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--color-bg-dark);
+            background-image: var(--color-bg-gradient);
+            color: var(--color-text-light);
+            line-height: 1.6;
+        }
+
+        /* ------------------------- */
+        /* --- Encabezado y Navegación --- */
+        /* ------------------------- */
+        .header-fixed {
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2.5rem; /* Padding reducido para logo */
+            background: rgba(10, 15, 11, 0.7);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .nav-logo {
+            text-decoration: none;
+        }
+        
+        /* Req 6: Estilo para el Logo */
+        .nav-logo img {
+            max-height: 40px; /* <-- AJUSTA LA ALTURA DE TU LOGO AQUÍ */
+            display: block;
+        }
+
+        .nav-links a {
+            font-family: var(--font-body);
+            font-weight: 600;
+            color: var(--color-text-muted);
+            text-decoration: none;
+            margin-left: 1.5rem;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--color-accent);
+        }
+
+        /* ------------------------- */
+        /* --- Sección Hero --- */
+        /* ------------------------- */
+        
+        /* --- CÓMO AÑADIR IMAGEN DE FONDO (Req 8) ---
+           1. Descomenta la línea 'background-image' de abajo.
+           2. Reemplaza 'URL_DE_TU_IMAGEN.jpg' con la ruta a tu imagen.
+        */
+        .hero-section {
+            /* background-image: url('URL_DE_TU_IMAGEN.jpg'); */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Opcional: crea efecto parallax */
+            
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            min-height: 100vh;
+            padding: 8rem 2rem 2rem 2rem;
+        }
+
+        .hero-title {
+            font-family: var(--font-title);
+            font-size: 4.5rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: #fff;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--color-text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .dynamic-info {
+            background: var(--color-container);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: 0.75rem 1.5rem;
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 0 25px var(--color-accent-glow);
+        }
+
+        .dynamic-info span {
+            font-size: 0.9rem;
+            color: var(--color-text-light);
+        }
+
+        #status-open-closed {
+            font-weight: 700;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+        }
+        #status-open-closed.open {
+            color: #1a5e3a;
+            background-color: var(--color-accent);
+        }
+        #status-open-closed.closed {
+            color: var(--color-text-light);
+            background-color: #8B0000; /* Rojo oscuro para cerrado */
+        }
+
+        /* Estilo de Botón Futurista */
+        .btn-cta {
+            font-family: var(--font-title);
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: var(--color-bg-dark);
+            background-color: var(--color-accent);
+            padding: 0.8rem 2.5rem;
+            border-radius: 6px;
+            box-shadow: 0 0 20px var(--color-accent-glow);
+            transition: all 0.3s ease;
+        }
+
+        .btn-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 30px var(--color-accent-glow);
+        }
+
+        /* ------------------------- */
+        /* --- Contenedor del Timeline --- */
+        /* ------------------------- */
+        .timeline-container {
+            position: relative;
+            max-width: 1000px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+
+        /* La línea central */
+        .timeline-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 2px;
+            margin-left: -1px;
+            background-color: var(--color-border);
+            box-shadow: 0 0 10px var(--color-accent-glow);
+        }
+
+        .timeline-item {
+            position: relative;
+            width: 50%;
+            padding: 1rem 2.5rem;
+            margin-bottom: 3rem;
+        }
+        .timeline-item:nth-child(odd) {
+            left: 0;
+            padding-right: 4rem;
+        }
+        .timeline-item:nth-child(even) {
+            left: 50%;
+            padding-left: 4rem;
+        }
+
+        /* El nodo (círculo) en la línea */
+        .timeline-node {
+            content: '';
+            position: absolute;
+            top: 1.5rem;
+            width: 16px;
+            height: 16px;
+            background-color: var(--color-accent);
+            border: 2px solid var(--color-bg-dark);
+            border-radius: 50%;
+            z-index: 1;
+            box-shadow: 0 0 15px var(--color-accent-glow);
+        }
+        .timeline-item:nth-child(odd) .timeline-node {
+            right: 2.5rem;
+        }
+        .timeline-item:nth-child(even) .timeline-node {
+            left: 2.5rem;
+        }
+        
+        /* El contenedor de contenido */
+        .timeline-content {
+            background: var(--color-container);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .timeline-content h2 {
+            font-family: var(--font-title);
+            font-size: 2rem;
+            color: var(--color-accent);
+            margin-bottom: 1rem;
+        }
+        
+        .timeline-content p {
+            margin-bottom: 1rem;
+            color: var(--color-text-muted);
+        }
+        
+        .timeline-content p strong { /* Req 5: Estilo para fecha de efeméride */
+             color: var(--color-accent);
+        }
+
+        /* Animación de Scroll */
+        .timeline-item {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ------------------------- */
+        /* --- Estilos de Contenido --- */
+        /* ------------------------- */
+
+        /* Req 4: Horarios (Nodo 1) */
+        .horarios-list {
+            list-style: none;
+            padding-left: 0;
+            font-size: 0.95rem;
+        }
+        .horarios-list li {
+            margin-bottom: 0.5rem;
+            color: var(--color-text-muted);
+        }
+        .horarios-list li strong {
+            color: var(--color-text-light);
+            min-width: 140px; /* Alineación */
+            display: inline-block;
+        }
+
+        /* Servicios (Nodo 5) */
+        .servicios-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        .servicios-list li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .servicios-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--color-accent);
+            font-weight: 700;
+        }
+        
+        /* Contacto (Nodo 6) */
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        /* Req 2: CSS para Círculos Perfectos */
+        .social-icons a {
+            display: flex; /* Usar flex para centrar */
+            align-items: center;
+            justify-content: center;
+            width: 40px;  /* Ancho fijo */
+            height: 40px; /* Alto fijo */
+            padding: 0;   /* Quitar padding */
+            background: var(--color-border);
+            border-radius: 50%; /* Círculo perfecto */
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+        .social-icons a:hover {
+            background: var(--color-accent);
+            transform: scale(1.1);
+        }
+        .social-icons ion-icon { /* Estilo para Ionicons */
+            font-size: 20px; /* Tamaño del icono */
+            color: var(--color-text-light);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+            border-top: 1px solid var(--color-border);
+            color: var(--color-text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* ------------------------- */
+        /* --- Responsividad Móvil --- */
+        /* ------------------------- */
+        @media screen and (max-width: 768px) {
+            .header-fixed {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            .nav-links {
+                margin-top: 0.5rem;
+            }
+            .nav-links a {
+                margin: 0 0.5rem;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+            .dynamic-info {
+                flex-direction: column;
+                gap: 0.5rem;
+                padding: 0.5rem 1rem;
+            }
+
+            /* Timeline en una columna */
+            .timeline-container::before {
+                left: 20px;
+                margin-left: 0;
+            }
+            .timeline-item {
+                width: 100%;
+                padding-left: 2.5rem;
+                padding-right: 0;
+            }
+            .timeline-item:nth-child(odd),
+            .timeline-item:nth-child(even) {
+                left: 0;
+                padding-left: 4rem; /* Espacio para la línea y nodo */
+            }
+            .timeline-node {
+                top: 1.5rem;
+            }
+            .timeline-item:nth-child(odd) .timeline-node,
+            .timeline-item:nth-child(even) .timeline-node {
+                left: 12px;
+                right: auto;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <header class="header-fixed" id="home">
+        
+        <a href="#home" class="nav-logo">
+            <img src="logo.png" alt="Logo de ZYRA">
+        </a>
+        <nav class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#servicios">Servicios</a>
+            <a href="#ubicacion">Ubicación</a>
+            <a href="#contacto">Contacto</a>
+        </nav>
+    </header>
+
+    <main>
+
+        <section class="hero-section">
+            <h1 class="hero-title">CUIDAMOS TUS DISPOSITIVOS, RESTAURAMOS TU TRANQUILIDAD</h1>
+            <p class="hero-subtitle">Venta y reparación para todos tus dispositivos.</p>
+            
+            <div class="dynamic-info">
+                <span id="current-date">Cargando fecha...</span>
+                <span id="current-time">Cargando hora...</span>
+                <span id="status-open-closed">Cargando...</span>
+            </div>
+            
+            <a href="#contacto" class="btn-cta">Contacto Rápido</a>
+        </section>
+
+        <section class="timeline-container" id="timeline">
+
+            <div class="timeline-item" id="ubicacion">
+                <div class="timeline-node"></div>
+                <div class="timeline-content">
+                    <h2>📍 Nuestra Ubicación y Horarios</h2>
+                    <p>Encontranos en: <strong>Hipólito Yrigoyen 435, Local 10</strong></p>
+                    
+                   
+                    
+                    <ul class="horarios-list">
+                        <li><strong>Lunes:</strong> 08:00 a 12:00 y 16:00 a 20:00</li>
+                        <li><strong>Martes:</strong> 08:00 a 12:00 y 16:00 a 20:00</li>
+                        <li><strong>Miércoles:</strong> 08:00 a 12:00 y 16:00 a 20:00</li>
+                        <li><strong>Jueves:</strong> 08:00 a 12:00 y 16:00 a 20:00</li>
+                        <li><strong>Viernes:</strong> 08:00 a 12:00 y 16:00 a 20:00</li>
+                        <li><strong>Sábados:</strong> 09:00 a 12:00 y 17:00 a 20:00</li>
+                        <li><strong>Domingos:</strong> Cerrado</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="timeline-item" id="efemerides">
+                <div class="timeline-node"></div>
+                <div class="timeline-content">
+                    <h2>📚 Efemérides Tecnológicas</h2>
+                    <p id="efemerides-content">Cargando efeméride...</p>
+                </div>
+            </div>
+
+            <div class="timeline-item" id="consejo">
+                <div class="timeline-node"></div>
+                <div class="timeline-content">
+                    <h2>💡 Consejo Tech del Día</h2>
+                    <p id="consejo-content">Cargando consejo...</p>
+                </div>
+            </div>
+
+            <div class="timeline-item" id="servicios">
+                <div class="timeline-node"></div>
+                <div class="timeline-content">
+                    <h2>🛠️ Nuestros Servicios</h2>
+                    <ul class="servicios-list">
+                        <li>Servicio Técnico (Teléfonos, Tablets, PC, Notebooks, Impresoras)</li>
+	    <li>Recuperación de Datos</li>
+                        <li>Soporte de Software y Eliminación de Virus</li>
+                        <li>Armamos tu PC Office o Gamer a Medida</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="timeline-item" id="contacto">
+                <div class="timeline-node"></div>
+                <div class="timeline-content">
+                    <h2>💬 Hablemos</h2>
+                    <p>Síguenos en nuestras redes o envíanos un mensaje directo. ¡Respondemos al instante!</p>
+                    
+                    <div class="social-icons">
+                        
+                        <a href="https://wa.me/3454083600?text=Hola%2C%20quisiera%20más%20información%20sobre%20sus%20servicios." target="_blank" aria-label="WhatsApp">
+                            <ion-icon name="logo-whatsapp"></ion-icon>
+                        </a>
+                        <a href="https://instagram.com/zyra.okz" target="_blank" aria-label="Instagram">
+                            <ion-icon name="logo-instagram"></ion-icon>
+                        </a>
+                        <a href="https://facebook.com/profile.php?id=61580199931400" target="_blank" aria-label="Facebook">
+                            <ion-icon name="logo-facebook"></ion-icon>
+                        </a>
+                        <a href="https://www.rapilist.com/company/zyra" target="_blank" aria-label="Sitio Web">
+                            <ion-icon name="globe-outline"></ion-icon>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 ZYRA. Todos los derechos reservados.</p>
+        <p><a href="#home" style="color: var(--color-text-muted); font-size: 0.8rem;">Política de Privacidad </a></p>
+    </footer>
+
+
+    <script>
+        /* ------------------------- */
+        /* --- JAVASCRIPT VANILLA --- */
+        /* ------------------------- */
+
+        document.addEventListener('DOMContentLoaded', () => {
+
+            /* ------------------------------------- */
+            /* --- Req 4: Lógica de Hora y Estado (Turno Partido) --- */
+            /* ------------------------------------- */
+            
+            // --- ¡EDITA ESTO! ---
+            // Define tu horario de atención aquí (Formato 24 horas)
+            // (Coincide con la lista del HTML)
+            const horarioAtencion = {
+                0: [], // Domingo (Cerrado)
+                1: [{ open: 8, close: 12 }, { open: 16, close: 20 }], // Lunes
+                2: [{ open: 8, close: 12 }, { open: 16, close: 20 }], // Martes
+                3: [{ open: 8, close: 12 }, { open: 16, close: 20 }], // Miércoles
+                4: [{ open: 8, close: 12 }, { open: 16, close: 20 }], // Jueves
+                5: [{ open: 8, close: 12 }, { open: 16, close: 20 }], // Viernes
+                6: [{ open: 9, close: 12 }, { open: 17, close: 20 }]  // Sábado
+            };
+            // ---------------------
+
+            const dateEl = document.getElementById('current-date');
+            const timeEl = document.getElementById('current-time');
+            const statusEl = document.getElementById('status-open-closed');
+
+            function updateTimeAndStatus() {
+                const now = new Date();
+                const dayOfWeek = now.getDay(); // 0 = Domingo, 1 = Lunes, etc.
+                const currentHour = now.getHours();
+
+                // Formatear Fecha y Día en Español
+                const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                let formattedDate = now.toLocaleString('es-ES', dateOptions);
+                dateEl.textContent = formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1);
+
+                // Formatear Hora
+                timeEl.textContent = now.toLocaleString('es-ES', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+
+                // Lógica de Abierto/Cerrado (con turno partido)
+                const bloquesHoy = horarioAtencion[dayOfWeek];
+                let estaAbierto = false;
+                
+                if (bloquesHoy.length > 0) {
+                    for (const bloque of bloquesHoy) {
+                        // Verifica si la hora actual está dentro de CUALQUIER bloque
+                        if (currentHour >= bloque.open && currentHour < bloque.close) {
+                            estaAbierto = true;
+                            break;
+                        }
+                    }
+                }
+
+                if (estaAbierto) {
+                    statusEl.textContent = 'Abierto';
+                    statusEl.className = 'open';
+                } else {
+                    statusEl.textContent = 'Cerrado';
+                    statusEl.className = 'closed';
+                }
+            }
+            setInterval(updateTimeAndStatus, 1000); // Actualiza cada segundo
+            updateTimeAndStatus(); // Llama una vez al cargar
+
+
+            /* ------------------------------------- */
+            /* --- Req 5 y 8: Contenido Dinámico (Efemérides y Consejos) --- */
+            /* ------------------------------------- */
+            
+            // --- ¡EDITA ESTO! ---
+            // Añade tus propios consejos. El script elegirá uno basado en el día.
+            const consejosTecnologicos = [
+                "No uses tu laptop sobre la cama o superficies blandas; bloquea la ventilación y puede causar sobrecalentamiento.", // Día 1
+                "Para extender la vida de tu batería, intenta mantenerla entre el 20% y el 80% de carga en lugar de cargarla al 100% siempre.", // Día 2
+                "¿Tu PC está lenta? Un disco de estado sólido (SSD) es la mejor actualización que puedes hacerle, ¡la diferencia es abismal!", // Día 3
+                "Limpia el puerto de carga de tu móvil con cuidado (aire comprimido o un palillo de madera). A veces 'no carga' solo por pelusa.", // Día 4
+                // ... Añade más consejos aquí (hasta 31)
+            ];
+
+            // --- ¡EDITA ESTO! (Req 8) ---
+            // Añade efemérides para cada día en formato "MM-DD".
+            const efemeridesTecnologicas = {
+                "01-01": "1985: Se establece el sistema de nombres de dominio (DNS).", // 1 de Enero
+                "01-09": "2007: Steve Jobs presenta el primer iPhone.", // 9 de Enero
+                "02-15": "1995: El FBI arresta a Kevin Mitnick, uno de los hackers más famosos.", // 15 de Febrero
+                "03-12": "1989: Tim Berners-Lee propone la World Wide Web.", // 12 de Marzo
+                "04-03": "1973: Martin Cooper realiza la primera llamada desde un teléfono móvil.", // 3 de Abril
+                "05-22": "1990: Microsoft lanza Windows 3.0.", // 22 de Mayo
+                "10-30": "1938: La transmisión de 'La Guerra de los Mundos' causa pánico, demostrando el poder de los medios masivos.", // 30 de Octubre
+                // ... Añade más (formato MM-DD)
+            };
+            // ---------------------
+
+            function setDynamicContent() {
+                const now = new Date();
+                const dayOfMonth = now.getDate(); // Día del mes (1-31)
+                
+                const consejoEl = document.getElementById('consejo-content');
+                const efemeridesEl = document.getElementById('efemerides-content');
+
+                // Consejo: Rota basado en el día del mes
+                const consejoIndex = (dayOfMonth - 1) % consejosTecnologicos.length;
+                if(consejosTecnologicos[consejoIndex]) {
+                    consejoEl.textContent = consejosTecnologicos[consejoIndex];
+                } else {
+                    consejoEl.textContent = "Revisa tus dispositivos y mantenlos actualizados."; // Fallback
+                }
+                
+                // Efeméride: Busca la fecha exacta (MM-DD)
+                const hoyMes = String(now.getMonth() + 1).padStart(2, '0');
+                const hoyDia = String(dayOfMonth).padStart(2, '0');
+                const keyFecha = `${hoyMes}-${hoyDia}`;
+                
+                const efemerideHoy = efemeridesTecnologicas[keyFecha];
+                
+                if (efemerideHoy) {
+                    // Req 5: Mostrar la fecha junto con la efeméride
+                    efemeridesEl.innerHTML = `<strong>${keyFecha}:</strong> ${efemerideHoy}`;
+                } else {
+                    efemeridesEl.textContent = "Un día como hoy, la tecnología siguió avanzando. (Añade una efeméride para esta fecha en el código).";
+                }
+            }
+            setDynamicContent();
+
+
+            /* ------------------------------------- */
+            /* --- Animación al Hacer Scroll --- */
+            /* ------------------------------------- */
+            const timelineItems = document.querySelectorAll('.timeline-item');
+
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1 // Se activa cuando el 10% del item es visible
+            });
+
+            timelineItems.forEach(item => {
+                observer.observe(item);
+            });
+            
+            /* ------------------------------------- */
+            /* --- Req 6: Navegación Suave (Home Fix) --- */
+            /* ------------------------------------- */
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const href = this.getAttribute('href');
+                    
+                    if (href === '#home') {
+                        // Si es 'home', ir al inicio absoluto
+                        window.scrollTo({
+                            top: 0,
+                            behavior: "smooth"
+                        });
+                    } else {
+                        // Para otros enlaces, calcular el offset
+                        const targetElement = document.querySelector(href);
+                        if(targetElement) {
+                            const headerOffset = document.querySelector('.header-fixed').offsetHeight;
+                            const elementPosition = targetElement.getBoundingClientRect().top;
+                            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                            window.scrollTo({
+                                top: offsetPosition,
+                                behavior: "smooth"
+                            });
+                        }
+                    }
+                });
+            });
+
+        }); // Fin de DOMContentLoaded
+    </script>
+
+</body>
+</html>
