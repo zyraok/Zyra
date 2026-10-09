@@ -798,10 +798,6 @@
             .card-consejo { grid-column: span 6; }
             .card-contacto { grid-column: span 12; }
         }
-
-        #inicio, #ubicacion, #servicios, #contacto {
-            scroll-margin-top: 75px; /* Deja espacio exacto para que no lo tape la barra superior */
-        }
     </style>
 </head>
 <body>
@@ -1031,6 +1027,24 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+
+            /* Desplazamiento inteligente con compensación para evitar que el header tape el contenido */
+            document.querySelectorAll('.nav-links a').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        const headerHeight = window.innerWidth <= 900 ? 95 : 80;
+                        const elementPosition = targetElement.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
 
             /* Cambio Global de Tema de Marca */
             const themeToggleBtn = document.getElementById('themeToggleBtn');
