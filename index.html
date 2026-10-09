@@ -767,15 +767,20 @@
                 text-align: right;
             }
 
-            /* Sector de contacto flexible sin cortes */
+            /* Sector de contacto corregido y fluido para móviles */
             .contacto-content {
                 flex-direction: column;
-                align-items: center;
-                text-align: center;
+                align-items: stretch;
+                text-align: left;
+                gap: 1.2rem;
+            }
+            .contacto-info {
+                width: 100%;
             }
             .social-row {
-                justify-content: center;
+                justify-content: flex-start;
                 width: 100%;
+                gap: 0.8rem;
             }
         }
 
