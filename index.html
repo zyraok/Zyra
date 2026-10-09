@@ -274,6 +274,7 @@
             position: relative;
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+            width: 100%;
         }
 
         .bento-card:hover {
@@ -292,6 +293,7 @@
             border: none !important; 
             padding: 0 !important;
             box-shadow: none !important;
+            width: 100% !important;
         }
         .card-servicios:hover {
             transform: none !important;
@@ -301,7 +303,7 @@
         }
         .card-juego { grid-column: 1 / -1; }
         .card-consejo { grid-column: 1 / -1; }
-        .card-contacto { grid-column: 1 / -1; }
+        .card-contacto { grid-column: 1 / -1; width: 100%; }
 
         /* ===== FLIP 3D SERVICIOS ===== */
         .flip-card-inner {
@@ -651,10 +653,12 @@
             align-items: center;
             flex-wrap: wrap;
             gap: 2rem;
+            width: 100%;
         }
 
         .contacto-info {
             flex: 1;
+            width: 100%;
         }
 
         .contacto-info p {
@@ -735,8 +739,10 @@
                 padding: 7.2rem 1rem 3rem 1rem;
             }
 
-            .card-ubicacion, .card-servicios, .card-juego, .card-consejo {
+            .bento-card, .card-ubicacion, .card-servicios, .card-juego, .card-consejo, .card-contacto {
                 grid-column: span 12;
+                width: 100% !important;
+                max-width: 100% !important;
             }
             
             /* Centrado y orden en sección Inicio para móviles */
@@ -767,20 +773,21 @@
                 text-align: right;
             }
 
-            /* Sector de contacto corregido y fluido para móviles */
+            /* Corrección definitiva de la tarjeta de contacto */
             .contacto-content {
-                flex-direction: column;
-                align-items: stretch;
-                text-align: left;
-                gap: 1.2rem;
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                text-align: left !important;
+                gap: 1.2rem !important;
+                width: 100% !important;
             }
             .contacto-info {
-                width: 100%;
+                width: 100% !important;
             }
             .social-row {
-                justify-content: flex-start;
-                width: 100%;
-                gap: 0.8rem;
+                justify-content: flex-start !important;
+                width: 100% !important;
+                gap: 0.8rem !important;
             }
         }
 
