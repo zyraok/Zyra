@@ -716,24 +716,31 @@
             color: var(--accent);
         }
 
-        /* ===== MEJORAS EXCLUSIVAS DE VISUALIZACIÓN MÓVIL (SIN ROMPER PC) ===== */
+        /* ===== MEJORAS EXCLUSIVAS DE VISUALIZACIÓN MÓVIL (AJUSTADAS PARA VER TODO EL MENÚ) ===== */
         @media (max-width: 900px) {
             header { 
-                padding: 0.8rem 1rem; 
+                padding: 0.8rem 0.5rem; 
                 flex-wrap: wrap;
-                gap: 0.8rem;
+                gap: 0.5rem;
             }
             .header-right {
                 width: 100%;
                 justify-content: space-between;
-                gap: 0.5rem;
+                gap: 0.3rem;
             }
             .nav-links { 
-                gap: 0.8rem; 
-                overflow-x: auto;
-                max-width: 70%;
+                gap: 0.4rem; /* Espaciado compacto para que quepan todos */
+                overflow-x: visible;
+                max-width: none;
             }
-            .nav-links a { font-size: 0.7rem; }
+            .nav-links a { 
+                font-size: 0.62rem; /* Tamaño de texto optimizado para móviles pequeños */
+                letter-spacing: 0.2px;
+            }
+            .theme-switcher-btn {
+                font-size: 0.68rem;
+                padding: 0.3rem 0.5rem;
+            }
             
             .dashboard-wrapper {
                 padding: 7.2rem 1rem 3rem 1rem;
@@ -745,7 +752,6 @@
                 max-width: 100% !important;
             }
             
-            /* Centrado y orden en sección Inicio para móviles */
             .hero-banner {
                 text-align: center;
                 padding: 2rem 1rem;
@@ -762,7 +768,6 @@
             }
             h1 { font-size: 1.8rem; }
 
-            /* Horarios ordenados en filas limpias */
             .horarios-list li {
                 flex-direction: row;
                 justify-content: space-between;
@@ -773,7 +778,6 @@
                 text-align: right;
             }
 
-            /* Corrección definitiva de la tarjeta de contacto */
             .contacto-content {
                 flex-direction: column !important;
                 align-items: flex-start !important;
@@ -854,7 +858,7 @@
             </div>
 
             <div class="bento-card card-juego">
-                <h2>🕹️ <span>ZYRA Arcade Center</span></h2>
+                <h2>🕹️ <span>ZYRA Arcade</span></h2>
                 <div class="arcade-container">
                     <div class="arcade-selector">
                         <button class="arcade-tab" data-game="snake">Snake</button>
@@ -1051,13 +1055,12 @@
             const themeToggleBtn = document.getElementById('themeToggleBtn');
             const themeNameEl = document.getElementById('themeName');
             
-            // El primer elemento es '' (esmeralda por defecto), luego blue, white, lime
             const themes = ['', 'theme-blue', 'theme-white', 'theme-lime'];
             const themeNames = { 
                 '': 'Verde', 
                 'theme-blue': 'Azul', 
                 'theme-white': 'Blanco', 
-                'theme-lime': 'Lima' 
+                'theme-lime': 'Ámbar' 
             };
             let currentThemeIndex = 0;
 
