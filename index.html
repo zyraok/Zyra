@@ -107,7 +107,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 4rem;
+            padding: 1rem 2rem;
             background: rgba(1, 4, 2, 0.92);
             backdrop-filter: blur(16px);
             border-bottom: 1px solid var(--border-neon);
@@ -117,22 +117,22 @@
         .header-right {
             display: flex;
             align-items: center;
-            gap: 2rem;
+            gap: 1.5rem;
         }
 
         .logo-container img {
-            height: 36px;
+            height: 32px;
             filter: drop-shadow(0 0 10px var(--accent-glow));
         }
 
         .nav-links {
             display: flex;
-            gap: 2rem;
+            gap: 1.5rem;
         }
 
         .nav-links a {
             font-family: var(--font-mono);
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: var(--text-muted);
             text-decoration: none;
             text-transform: uppercase;
@@ -169,7 +169,7 @@
         .dashboard-wrapper {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 8rem 2rem 4rem 2rem;
+            padding: 7.5rem 1.5rem 4rem 1.5rem;
             display: flex;
             flex-direction: column;
             gap: 2rem;
@@ -180,7 +180,7 @@
             backdrop-filter: blur(12px);
             border: 1px solid var(--border-neon);
             border-radius: 20px;
-            padding: 3.5rem 3rem;
+            padding: 2.5rem 2rem;
             position: relative;
             overflow: hidden;
             box-shadow: 0 20px 40px rgba(0,0,0,0.6);
@@ -189,13 +189,13 @@
 
         .status-hud {
             display: inline-flex;
-            gap: 1.5rem;
+            gap: 1.2rem;
             background: rgba(0, 0, 0, 0.6);
             border: 1px solid var(--border-neon);
             padding: 0.5rem 1.2rem;
             border-radius: 30px;
             font-family: var(--font-mono);
-            font-size: 0.8rem;
+            font-size: 0.78rem;
             margin-bottom: 1.5rem;
             align-items: center;
             flex-wrap: wrap;
@@ -217,7 +217,7 @@
         }
 
         h1 {
-            font-size: 3rem;
+            font-size: 2.3rem;
             font-weight: 700;
             line-height: 1.15;
             margin-bottom: 1rem;
@@ -231,7 +231,7 @@
 
         .hero-banner p {
             color: var(--text-muted);
-            font-size: 1.1rem;
+            font-size: 1rem;
             margin-bottom: 2rem;
         }
 
@@ -259,7 +259,7 @@
 
         .bento-grid {
             display: grid;
-            grid-template-columns: repeat(12, 1fr);
+            grid-template-columns: 1fr;
             gap: 2rem;
         }
 
@@ -268,7 +268,7 @@
             backdrop-filter: blur(12px);
             border: 1px solid var(--border-neon);
             border-radius: 20px;
-            padding: 2.5rem;
+            padding: 2rem;
             transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
             position: relative;
             overflow: hidden;
@@ -282,9 +282,9 @@
             box-shadow: 0 15px 40px rgba(0,0,0,0.6), 0 0 25px var(--accent-glow);
         }
 
-        .card-ubicacion { grid-column: span 7; }
+        .card-ubicacion { grid-column: 1 / -1; }
         .card-servicios { 
-            grid-column: span 5; 
+            grid-column: 1 / -1; 
             perspective: 1000px; 
             cursor: pointer; 
             background: transparent !important; 
@@ -298,9 +298,9 @@
             border-color: transparent !important;
             box-shadow: none !important;
         }
-        .card-juego { grid-column: span 6; }
-        .card-consejo { grid-column: span 6; }
-        .card-contacto { grid-column: span 12; }
+        .card-juego { grid-column: 1 / -1; }
+        .card-consejo { grid-column: 1 / -1; }
+        .card-contacto { grid-column: 1 / -1; }
 
         /* ===== FLIP 3D SERVICIOS ===== */
         .flip-card-inner {
@@ -323,7 +323,7 @@
             backdrop-filter: blur(12px);
             border: 1px solid var(--border-neon);
             border-radius: 20px;
-            padding: 2.2rem 2.2rem 1.6rem 2.2rem;
+            padding: 2rem;
             backface-visibility: hidden;
             -webkit-backface-visibility: hidden;
             box-shadow: 0 10px 30px rgba(0,0,0,0.4);
@@ -372,7 +372,7 @@
 
         .tech-specs-item {
             display: grid;
-            grid-template-columns: 1.2rem 110px 1fr;
+            grid-template-columns: 1.2rem 100px 1fr;
             align-items: start;
             gap: 0.5rem;
             font-size: 0.85rem;
@@ -395,7 +395,7 @@
         }
 
         .bento-card h2 {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: 600;
             margin-bottom: 1.2rem;
             display: flex;
@@ -531,6 +531,7 @@
             display: block;
             box-shadow: inset 0 0 15px rgba(0,0,0,0.9);
             touch-action: none;
+            max-width: 100%;
         }
 
         .touch-controls {
@@ -658,6 +659,7 @@
         .social-row {
             display: flex;
             gap: 1rem;
+            flex-wrap: wrap;
         }
 
         .social-row a {
@@ -703,17 +705,27 @@
             color: var(--accent);
         }
 
+        /* DISEÑO ADAPTATIVO (MEDIA QUERIES) */
         @media (max-width: 900px) {
-            header { padding: 1rem 1.5rem; }
-            .nav-links { display: none; }
+            header { padding: 1rem 1.2rem; }
+            .nav-links { gap: 1rem; }
+            .nav-links a { font-size: 0.72rem; }
             .card-ubicacion, .card-servicios, .card-juego, .card-consejo {
                 grid-column: span 12;
             }
-            h1 { font-size: 2.2rem; }
+            h1 { font-size: 2rem; }
             .contacto-content {
                 flex-direction: column;
                 align-items: flex-start;
             }
+        }
+
+        @media (min-width: 900px) {
+            .card-ubicacion { grid-column: span 7; }
+            .card-servicios { grid-column: span 5; }
+            .card-juego { grid-column: span 6; }
+            .card-consejo { grid-column: span 6; }
+            .card-contacto { grid-column: span 12; }
         }
 
         #inicio, #ubicacion, #servicios, #contacto {
