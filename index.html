@@ -158,6 +158,7 @@
             align-items: center;
             gap: 0.4rem;
             transition: all 0.3s ease;
+            white-space: nowrap;
         }
 
         .theme-switcher-btn:hover {
@@ -431,6 +432,7 @@
             padding: 0.4rem 0;
             border-bottom: 1px solid rgba(255,255,255,0.03);
             color: var(--text-muted);
+            gap: 1rem;
         }
 
         .horarios-list li strong {
@@ -651,6 +653,10 @@
             gap: 2rem;
         }
 
+        .contacto-info {
+            flex: 1;
+        }
+
         .contacto-info p {
             color: var(--text-muted);
             margin-top: 0.5rem;
@@ -675,6 +681,7 @@
             font-size: 1.4rem;
             transition: all 0.3s ease;
             text-decoration: none;
+            flex-shrink: 0;
         }
 
         .social-row a:hover {
@@ -705,18 +712,70 @@
             color: var(--accent);
         }
 
-        /* DISEÑO ADAPTATIVO (MEDIA QUERIES) */
+        /* ===== MEJORAS EXCLUSIVAS DE VISUALIZACIÓN MÓVIL (SIN ROMPER PC) ===== */
         @media (max-width: 900px) {
-            header { padding: 1rem 1.2rem; }
-            .nav-links { gap: 1rem; }
-            .nav-links a { font-size: 0.72rem; }
+            header { 
+                padding: 0.8rem 1rem; 
+                flex-wrap: wrap;
+                gap: 0.8rem;
+            }
+            .header-right {
+                width: 100%;
+                justify-content: space-between;
+                gap: 0.5rem;
+            }
+            .nav-links { 
+                gap: 0.8rem; 
+                overflow-x: auto;
+                max-width: 70%;
+            }
+            .nav-links a { font-size: 0.7rem; }
+            
+            .dashboard-wrapper {
+                padding: 7.2rem 1rem 3rem 1rem;
+            }
+
             .card-ubicacion, .card-servicios, .card-juego, .card-consejo {
                 grid-column: span 12;
             }
-            h1 { font-size: 2rem; }
+            
+            /* Centrado y orden en sección Inicio para móviles */
+            .hero-banner {
+                text-align: center;
+                padding: 2rem 1rem;
+            }
+            .status-hud {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+                margin-left: auto;
+                margin-right: auto;
+                width: 100%;
+                max-width: 320px;
+            }
+            h1 { font-size: 1.8rem; }
+
+            /* Horarios ordenados en filas limpias */
+            .horarios-list li {
+                flex-direction: row;
+                justify-content: space-between;
+                text-align: left;
+                font-size: 0.8rem;
+            }
+            .horarios-list li span {
+                text-align: right;
+            }
+
+            /* Sector de contacto flexible sin cortes */
             .contacto-content {
                 flex-direction: column;
-                align-items: flex-start;
+                align-items: center;
+                text-align: center;
+            }
+            .social-row {
+                justify-content: center;
+                width: 100%;
             }
         }
 
