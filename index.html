@@ -13,24 +13,24 @@
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
     <style>
-        /* TEMA 1: VERDE LIMA ZYRA (Por defecto, basado en la "Z" del logo) */
+        /* TEMA POR DEFECTO: VERDE ESMERALDA ZYRA */
         :root {
-            --bg-deep: #010402;
-            --bg-card: rgba(6, 18, 11, 0.90);
-            --bg-card-hover: rgba(10, 30, 18, 0.96);
-            --border-neon: rgba(164, 221, 65, 0.4);
-            --border-neon-hover: rgba(164, 221, 65, 0.85);
-            --text-main: #edf2ef;
-            --text-muted: #8ca38e;
-            --accent: #a4dd41;
-            --accent-glow: rgba(164, 221, 65, 0.35);
+            --bg-deep: #010503;
+            --bg-card: rgba(5, 20, 14, 0.90);
+            --bg-card-hover: rgba(8, 34, 22, 0.96);
+            --border-neon: rgba(46, 229, 157, 0.4);
+            --border-neon-hover: rgba(46, 229, 157, 0.85);
+            --text-main: #edfef5;
+            --text-muted: #8ab8a2;
+            --accent: #2ee59d;
+            --accent-glow: rgba(46, 229, 157, 0.35);
             --danger: #ff4d4d;
             
             --font-main: 'Space Grotesk', sans-serif;
             --font-mono: 'JetBrains Mono', monospace;
         }
 
-        /* TEMA 2: AZUL PROFUNDO (Inspirado en los cuerpos oscuros del logo) */
+        /* TEMA 2: AZUL PROFUNDO */
         body.theme-blue {
             --bg-deep: #010308;
             --bg-card: rgba(6, 12, 22, 0.90);
@@ -44,7 +44,7 @@
             --danger: #ff4d4d;
         }
 
-        /* TEMA 3: BLANCO PURO / BRILLO (Inspirado en la punta de la "A" del logo) */
+        /* TEMA 3: BLANCO PURO / BRILLO */
         body.theme-white {
             --bg-deep: #050505;
             --bg-card: rgba(18, 18, 18, 0.92);
@@ -58,17 +58,17 @@
             --danger: #ff4d4d;
         }
 
-        /* TEMA 4: ESMERALDA TECNOLÓGICO */
-        body.theme-emerald {
-            --bg-deep: #010503;
-            --bg-card: rgba(5, 20, 14, 0.90);
-            --bg-card-hover: rgba(8, 34, 22, 0.96);
-            --border-neon: rgba(46, 229, 157, 0.4);
-            --border-neon-hover: rgba(46, 229, 157, 0.85);
-            --text-main: #edfef5;
-            --text-muted: #8ab8a2;
-            --accent: #2ee59d;
-            --accent-glow: rgba(46, 229, 157, 0.35);
+        /* TEMA 4: VERDE LIMA ZYRA (Alternativo) */
+        body.theme-lime {
+            --bg-deep: #010402;
+            --bg-card: rgba(6, 18, 11, 0.90);
+            --bg-card-hover: rgba(10, 30, 18, 0.96);
+            --border-neon: rgba(164, 221, 65, 0.4);
+            --border-neon-hover: rgba(164, 221, 65, 0.85);
+            --text-main: #edf2ef;
+            --text-muted: #8ca38e;
+            --accent: #a4dd41;
+            --accent-glow: rgba(164, 221, 65, 0.35);
             --danger: #ff4d4d;
         }
 
@@ -89,7 +89,7 @@
             color: var(--text-main);
             background-image: 
                 radial-gradient(circle at 50% 10%, var(--accent-glow) 0%, transparent 60%),
-                linear-gradient(rgba(1, 4, 2, 0.92), rgba(1, 4, 2, 0.97)),
+                linear-gradient(rgba(1, 5, 3, 0.92), rgba(1, 5, 3, 0.97)),
                 radial-gradient(var(--border-neon) 1.5px, transparent 1.5px);
             background-size: 100% 100%, 100% 100%, 40px 40px;
             background-attachment: fixed;
@@ -108,7 +108,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 1rem 2rem;
-            background: rgba(1, 4, 2, 0.92);
+            background: rgba(1, 5, 3, 0.92);
             backdrop-filter: blur(16px);
             border-bottom: 1px solid var(--border-neon);
             transition: border-color 0.4s ease;
@@ -463,7 +463,7 @@
         }
 
         .arcade-container {
-            background: #010402;
+            background: #010503;
             border: 1px solid var(--border-neon);
             border-radius: 12px;
             padding: 1rem;
@@ -548,7 +548,7 @@
         }
 
         .touch-btn {
-            background: linear-gradient(180deg, rgba(164,221,65,0.16), rgba(4,18,11,0.96));
+            background: linear-gradient(180deg, rgba(46,229,157,0.16), rgba(5,20,14,0.96));
             border: 1px solid var(--border-neon);
             color: var(--accent);
             font-family: var(--font-mono);
@@ -703,7 +703,7 @@
             color: var(--text-muted);
             font-size: 0.85rem;
             font-family: var(--font-mono);
-            background: rgba(1, 4, 2, 0.85);
+            background: rgba(1, 5, 3, 0.85);
             margin-top: 2rem;
             transition: border-color 0.4s ease;
         }
@@ -814,7 +814,7 @@
                 <a href="#contacto">Contacto</a>
             </nav>
             <button class="theme-switcher-btn" id="themeToggleBtn" title="Cambiar Tema de Marca">
-                ⚡ <span id="themeName">Ámbar</span>
+                ⚡ <span id="themeName">Verde</span>
             </button>
         </div>
     </header>
@@ -1028,7 +1028,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
 
-            /* Desplazamiento dinámico: Mide la altura real del header en tiempo de ejecución para evitar cortes */
+            /* Desplazamiento dinámico optimizado para evitar cortes bajo el header flotante */
             document.querySelectorAll('.nav-links a').forEach(anchor => {
                 anchor.addEventListener('click', function(e) {
                     e.preventDefault();
@@ -1047,28 +1047,30 @@
                 });
             });
 
-            /* Cambio Global de Tema de Marca */
+            /* Cambio Global de Tema de Marca (Inicia en Verde Esmeralda por defecto) */
             const themeToggleBtn = document.getElementById('themeToggleBtn');
             const themeNameEl = document.getElementById('themeName');
-            const themes = ['default', 'blue', 'white', 'emerald'];
+            
+            // El primer elemento es '' (esmeralda por defecto), luego blue, white, lime
+            const themes = ['', 'theme-blue', 'theme-white', 'theme-lime'];
             const themeNames = { 
-                default: 'Ámbar', 
-                blue: 'Azul', 
-                white: 'Blanco', 
-                emerald: 'Verde' 
+                '': 'Verde', 
+                'theme-blue': 'Azul', 
+                'theme-white': 'Blanco', 
+                'theme-lime': 'Lima' 
             };
             let currentThemeIndex = 0;
 
             themeToggleBtn.addEventListener('click', () => {
-                document.body.classList.remove('theme-blue', 'theme-white', 'theme-emerald');
+                document.body.classList.remove('theme-blue', 'theme-white', 'theme-lime');
                 currentThemeIndex = (currentThemeIndex + 1) % themes.length;
-                const activeTheme = themes[currentThemeIndex];
+                const activeThemeClass = themes[currentThemeIndex];
                 
-                if (activeTheme === 'blue') document.body.classList.add('theme-blue');
-                if (activeTheme === 'white') document.body.classList.add('theme-white');
-                if (activeTheme === 'emerald') document.body.classList.add('theme-emerald');
+                if (activeThemeClass) {
+                    document.body.classList.add(activeThemeClass);
+                }
                 
-                themeNameEl.textContent = themeNames[activeTheme];
+                themeNameEl.textContent = themeNames[activeThemeClass];
             });
 
             /* Efecto Flip 3D Servicios */
@@ -1172,7 +1174,7 @@
                 sCtx.fillStyle = '#030805';
                 sCtx.fillRect(0, 0, snakeCanvas.width, snakeCanvas.height);
 
-                sCtx.strokeStyle = 'rgba(164,221,65,0.075)';
+                sCtx.strokeStyle = 'rgba(46,229,157,0.075)';
                 sCtx.lineWidth = 1;
                 for (let x = 0; x <= snakeCanvas.width; x += 20) {
                     sCtx.beginPath(); sCtx.moveTo(x, 0); sCtx.lineTo(x, snakeCanvas.height); sCtx.stroke();
@@ -1192,13 +1194,13 @@
                 snake.forEach((p, i) => {
                     const x = p.x * sGrid, y = p.y * sGrid;
                     sCtx.save();
-                    sCtx.shadowColor = '#a4dd41'; sCtx.shadowBlur = i === 0 ? 7 : 3;
-                    sCtx.fillStyle = i === 0 ? '#a4dd41' : '#1b3310';
-                    sCtx.strokeStyle = i === 0 ? '#d2ff82' : '#a4dd41';
+                    sCtx.shadowColor = '#2ee59d'; sCtx.shadowBlur = i === 0 ? 7 : 3;
+                    sCtx.fillStyle = i === 0 ? '#2ee59d' : '#0e3020';
+                    sCtx.strokeStyle = i === 0 ? '#9fffce' : '#2ee59d';
                     sCtx.fillRect(x + 1, y + 1, sGrid - 3, sGrid - 3);
                     sCtx.strokeRect(x + 1.5, y + 1.5, sGrid - 4, sGrid - 4);
                     if (i === 0) {
-                        sCtx.fillStyle = '#010402';
+                        sCtx.fillStyle = '#010503';
                         sCtx.fillRect(x + 3, y + 3, 2, 2);
                         sCtx.fillRect(x + 6, y + 3, 2, 2);
                     }
@@ -1227,7 +1229,7 @@
             function endSnake() {
                 clearInterval(sInterval); sRunning = false;
                 snakeBtn.textContent = "Jugar de Nuevo";
-                sCtx.fillStyle = 'rgba(3,7,4,0.85)'; sCtx.fillRect(0,0,snakeCanvas.width, snakeCanvas.height);
+                sCtx.fillStyle = 'rgba(3,8,5,0.85)'; sCtx.fillRect(0,0,snakeCanvas.width, snakeCanvas.height);
                 sCtx.fillStyle = '#ff4d4d'; sCtx.font = '11px monospace'; sCtx.textAlign = 'center';
                 sCtx.fillText("GAME OVER", snakeCanvas.width/2, snakeCanvas.height/2);
             }
@@ -1263,30 +1265,30 @@
                 pCtx.fillStyle = '#030805';
                 pCtx.fillRect(0, 0, pongCanvas.width, pongCanvas.height);
 
-                pCtx.strokeStyle = 'rgba(164,221,65,0.065)';
+                pCtx.strokeStyle = 'rgba(46,229,157,0.065)';
                 pCtx.lineWidth = 1;
                 for (let x = 0; x <= pongCanvas.width; x += 20) { pCtx.beginPath(); pCtx.moveTo(x,0); pCtx.lineTo(x,pongCanvas.height); pCtx.stroke(); }
                 for (let y = 0; y <= pongCanvas.height; y += 20) { pCtx.beginPath(); pCtx.moveTo(0,y); pCtx.lineTo(pongCanvas.width,y); pCtx.stroke(); }
 
-                pCtx.strokeStyle = 'rgba(164,221,65,0.42)';
+                pCtx.strokeStyle = 'rgba(46,229,157,0.42)';
                 pCtx.setLineDash([3, 4]);
                 pCtx.beginPath(); pCtx.moveTo(pongCanvas.width/2, 0); pCtx.lineTo(pongCanvas.width/2, pongCanvas.height); pCtx.stroke();
                 pCtx.setLineDash([]);
 
                 function drawPaddle(x, y) {
                     pCtx.save();
-                    pCtx.shadowColor = '#a4dd41'; pCtx.shadowBlur = 7;
-                    pCtx.fillStyle = '#10220a'; pCtx.strokeStyle = '#a4dd41';
+                    pCtx.shadowColor = '#2ee59d'; pCtx.shadowBlur = 7;
+                    pCtx.fillStyle = '#082216'; pCtx.strokeStyle = '#2ee59d';
                     pCtx.fillRect(x, y, 6, 36); pCtx.strokeRect(x + .5, y + .5, 5, 35);
-                    pCtx.fillStyle = '#a4dd41'; pCtx.fillRect(x + 2, y + 4, 2, 28);
+                    pCtx.fillStyle = '#2ee59d'; pCtx.fillRect(x + 2, y + 4, 2, 28);
                     pCtx.restore();
                 }
                 drawPaddle(10, pY);
                 drawPaddle(pongCanvas.width - 16, cY);
 
                 pCtx.save();
-                pCtx.shadowColor = '#d2ff82'; pCtx.shadowBlur = 10;
-                pCtx.fillStyle = '#a4dd41'; pCtx.fillRect(ballX - 3, ballY - 3, 6, 6);
+                pCtx.shadowColor = '#9fffce'; pCtx.shadowBlur = 10;
+                pCtx.fillStyle = '#2ee59d'; pCtx.fillRect(ballX - 3, ballY - 3, 6, 6);
                 pCtx.fillStyle = '#ffffff'; pCtx.fillRect(ballX - 1, ballY - 1, 2, 2);
                 pCtx.restore();
             }
@@ -1356,16 +1358,16 @@
                 tCtx.fillStyle = '#030805';
                 tCtx.fillRect(0, 0, tetrisCanvas.width, tetrisCanvas.height);
 
-                tCtx.strokeStyle = 'rgba(164,221,65,0.075)';
+                tCtx.strokeStyle = 'rgba(46,229,157,0.075)';
                 tCtx.lineWidth = 1;
                 for (let x = 0; x <= tetrisCanvas.width; x += tSize) { tCtx.beginPath(); tCtx.moveTo(x,0); tCtx.lineTo(x,tetrisCanvas.height); tCtx.stroke(); }
                 for (let y = 0; y <= tetrisCanvas.height; y += tSize) { tCtx.beginPath(); tCtx.moveTo(0,y); tCtx.lineTo(tetrisCanvas.width,y); tCtx.stroke(); }
 
                 function drawBlock(x, y, active) {
                     tCtx.save();
-                    tCtx.shadowColor = '#a4dd41'; tCtx.shadowBlur = active ? 6 : 2;
-                    tCtx.fillStyle = active ? '#a4dd41' : '#1b3310';
-                    tCtx.strokeStyle = active ? '#e2ffb3' : '#a4dd41';
+                    tCtx.shadowColor = '#2ee59d'; tCtx.shadowBlur = active ? 6 : 2;
+                    tCtx.fillStyle = active ? '#2ee59d' : '#0e3020';
+                    tCtx.strokeStyle = active ? '#9fffce' : '#2ee59d';
                     tCtx.fillRect(x + 1, y + 1, tSize - 2, tSize - 2);
                     tCtx.strokeRect(x + 1.5, y + 1.5, tSize - 3, tSize - 3);
                     tCtx.fillStyle = 'rgba(255,255,255,0.18)';
@@ -1538,7 +1540,7 @@
 
             function drawRunnerGrid() {
                 rCtx.save();
-                rCtx.strokeStyle = 'rgba(164,221,65,0.075)';
+                rCtx.strokeStyle = 'rgba(46,229,157,0.075)';
                 rCtx.lineWidth = 1;
                 for (let x = 0; x <= rCanvas.width; x += 20) {
                     rCtx.beginPath(); rCtx.moveTo(x, 0); rCtx.lineTo(x, FLOOR_Y + 15); rCtx.stroke();
@@ -1589,22 +1591,22 @@
                     rCtx.beginPath(); rCtx.moveTo(obs.x, topY + obs.h / 2); rCtx.lineTo(obs.x - 3, topY + obs.h / 2); rCtx.moveTo(obs.x + obs.w, topY + obs.h / 2); rCtx.lineTo(obs.x + obs.w + 3, topY + obs.h / 2); rCtx.stroke();
                 } else if (obs.type === 'chip') {
                     rCtx.fillStyle = '#17231e';
-                    rCtx.strokeStyle = '#a4dd41';
+                    rCtx.strokeStyle = '#2ee59d';
                     rCtx.fillRect(obs.x, topY, obs.w, obs.h); rCtx.strokeRect(obs.x + .5, topY + .5, obs.w - 1, obs.h - 1);
-                    rCtx.fillStyle = '#a4dd41'; rCtx.fillRect(obs.x + 5, topY + 4, 6, 5);
+                    rCtx.fillStyle = '#2ee59d'; rCtx.fillRect(obs.x + 5, topY + 4, 6, 5);
                     rCtx.strokeStyle = '#9ab7a8';
                     for (let i = 3; i < obs.w; i += 5) { rCtx.beginPath(); rCtx.moveTo(obs.x + i, topY); rCtx.lineTo(obs.x + i, topY - 3); rCtx.moveTo(obs.x + i, baseY); rCtx.lineTo(obs.x + i, baseY + 3); rCtx.stroke(); }
                 } else if (obs.type === 'usb') {
                     rCtx.fillStyle = '#b9c8c0'; rCtx.fillRect(obs.x, topY + 2, obs.w, obs.h - 2);
                     rCtx.fillStyle = '#33463c'; rCtx.fillRect(obs.x + 3, topY + 4, obs.w - 6, obs.h - 5);
-                    rCtx.fillStyle = '#a4dd41'; rCtx.fillRect(obs.x + 5, topY + 6, 2, 2); rCtx.fillRect(obs.x + 10, topY + 6, 2, 2);
+                    rCtx.fillStyle = '#2ee59d'; rCtx.fillRect(obs.x + 5, topY + 6, 2, 2); rCtx.fillRect(obs.x + 10, topY + 6, 2, 2);
                 } else {
                     rCtx.strokeStyle = '#cbd7d0';
                     rCtx.lineWidth = 2;
                     rCtx.beginPath();
                     rCtx.arc(obs.x + obs.w / 2, topY + obs.h / 2, 5, 0, Math.PI * 1.7);
                     rCtx.stroke();
-                    rCtx.strokeStyle = '#a4dd41';
+                    rCtx.strokeStyle = '#2ee59d';
                     rCtx.lineWidth = 1;
                     rCtx.beginPath(); rCtx.moveTo(obs.x + 1, topY + obs.h / 2); rCtx.lineTo(obs.x - 3, topY + obs.h / 2); rCtx.moveTo(obs.x + obs.w - 1, topY + obs.h / 2); rCtx.lineTo(obs.x + obs.w + 3, topY + obs.h / 2); rCtx.stroke();
                 }
@@ -1617,39 +1619,39 @@
 
                 const top = ry - RUNNER_H;
                 rCtx.save();
-                rCtx.shadowColor = 'rgba(164,221,65,0.65)';
+                rCtx.shadowColor = 'rgba(46,229,157,0.65)';
                 rCtx.shadowBlur = 7;
 
                 rCtx.shadowBlur = 0;
                 rCtx.fillStyle = '#0c1812';
                 rCtx.fillRect(rx + 2, ry - 5, 3, 6);
                 rCtx.fillRect(rx + 8, ry - 5, 3, 6);
-                rCtx.fillStyle = '#a4dd41';
+                rCtx.fillStyle = '#2ee59d';
                 rCtx.fillRect(rx + 1, ry, 5, 2);
                 rCtx.fillRect(rx + 7, ry, 5, 2);
 
                 rCtx.fillStyle = '#10241a';
-                rCtx.strokeStyle = '#a4dd41';
+                rCtx.strokeStyle = '#2ee59d';
                 rCtx.lineWidth = 1;
                 rCtx.fillRect(rx, top + 7, RUNNER_W, 12);
                 rCtx.strokeRect(rx + .5, top + 7.5, RUNNER_W - 1, 11);
 
                 rCtx.fillStyle = '#182c23';
                 rCtx.fillRect(rx + 1, top, 11, 9);
-                rCtx.strokeStyle = '#d2ff82';
+                rCtx.strokeStyle = '#9fffce';
                 rCtx.strokeRect(rx + 1.5, top + .5, 10, 8);
                 rCtx.fillStyle = '#07120d';
                 rCtx.fillRect(rx + 3, top + 3, 7, 3);
-                rCtx.fillStyle = '#a4dd41';
+                rCtx.fillStyle = '#2ee59d';
                 rCtx.fillRect(rx + 4, top + 4, 1, 1);
                 rCtx.fillRect(rx + 8, top + 4, 1, 1);
 
-                rCtx.strokeStyle = '#a4dd41';
+                rCtx.strokeStyle = '#2ee59d';
                 rCtx.beginPath(); rCtx.moveTo(rx + 6, top); rCtx.lineTo(rx + 6, top - 4); rCtx.stroke();
                 rCtx.fillStyle = '#ff4d4d';
                 rCtx.fillRect(rx + 5, top - 5, 3, 2);
 
-                rCtx.fillStyle = '#a4dd41';
+                rCtx.fillStyle = '#2ee59d';
                 rCtx.font = 'bold 7px monospace';
                 rCtx.textAlign = 'center';
                 rCtx.fillText('Z', rx + RUNNER_W / 2, top + 16);
@@ -1662,8 +1664,8 @@
                 rCtx.fillRect(0, 0, rCanvas.width, rCanvas.height);
                 drawRunnerGrid();
 
-                rCtx.strokeStyle = '#a4dd41';
-                rCtx.shadowColor = 'rgba(164,221,65,0.45)';
+                rCtx.strokeStyle = '#2ee59d';
+                rCtx.shadowColor = 'rgba(46,229,157,0.45)';
                 rCtx.shadowBlur = 4;
                 rCtx.lineWidth = 1.5;
                 rCtx.beginPath(); rCtx.moveTo(0, FLOOR_Y + 3); rCtx.lineTo(rCanvas.width, FLOOR_Y + 3); rCtx.stroke();
@@ -1675,11 +1677,11 @@
                 if (!rIsActive && !rGameOver && rScoreVal === 0) {
                     rCtx.fillStyle = 'rgba(3,8,5,0.38)';
                     rCtx.fillRect(0, 0, rCanvas.width, rCanvas.height);
-                    rCtx.fillStyle = '#a4dd41';
+                    rCtx.fillStyle = '#2ee59d';
                     rCtx.font = 'bold 10px monospace';
                     rCtx.textAlign = 'center';
                     rCtx.fillText('ZYRA TECH RUNNER', rCanvas.width / 2, 48);
-                    rCtx.fillStyle = '#8ca38e';
+                    rCtx.fillStyle = '#8ab8a2';
                     rCtx.font = '8px monospace';
                     rCtx.fillText('PULSÁ PARA SALTAR', rCanvas.width / 2, 62);
                 }
@@ -1691,10 +1693,10 @@
                     rCtx.fillStyle = '#ff4d4d';
                     rCtx.font = 'bold 12px monospace';
                     rCtx.fillText('CORTO CIRCUITO', rCanvas.width / 2, 60);
-                    rCtx.fillStyle = '#edf2ef';
+                    rCtx.fillStyle = '#edfef5';
                     rCtx.font = '8px monospace';
                     rCtx.fillText('DISTANCIA: ' + rScoreVal + 'm', rCanvas.width / 2, 76);
-                    rCtx.fillStyle = '#a4dd41';
+                    rCtx.fillStyle = '#2ee59d';
                     rCtx.fillText('PULSÁ PARA REINICIAR', rCanvas.width / 2, 92);
                 }
             }
