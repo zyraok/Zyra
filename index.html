@@ -1028,14 +1028,15 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
 
-            /* Desplazamiento inteligente con compensación para evitar que el header tape el contenido */
+            /* Desplazamiento dinámico: Mide la altura real del header en tiempo de ejecución para evitar cortes */
             document.querySelectorAll('.nav-links a').forEach(anchor => {
                 anchor.addEventListener('click', function(e) {
                     e.preventDefault();
                     const targetId = this.getAttribute('href');
                     const targetElement = document.querySelector(targetId);
                     if (targetElement) {
-                        const headerHeight = window.innerWidth <= 900 ? 95 : 80;
+                        const headerElement = document.querySelector('header');
+                        const headerHeight = headerElement ? headerElement.offsetHeight + 15 : 120;
                         const elementPosition = targetElement.getBoundingClientRect().top;
                         const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
                         window.scrollTo({
